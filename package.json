@@ -1,0 +1,11 @@
+{
+  "name": "agentfeed-apify",
+  "private": true,
+  "license": "MIT",
+  "description": "Apify actors backed by AgentFeed (x402.ochinimus.app). Root package only runs the tests and syncs shared/ into each actor.",
+  "type": "module",
+  "scripts": {
+    "sync": "for f in */src/agentfeed.js; do cp shared/agentfeed.js $f; done",
+    "test": "node --test \"test/*.test.js\" \"*/test/*.test.js\""
+  }
+}
