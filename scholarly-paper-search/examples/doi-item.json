@@ -1,0 +1,22 @@
+{
+  "query": null,
+  "title": "Deep learning",
+  "year": 2015,
+  "doi": "10.1038/nature14539",
+  "authors": [
+    "Yann LeCun",
+    "Yoshua Bengio",
+    "Geoffrey E. Hinton"
+  ],
+  "authors_total": 3,
+  "venue": "Nature",
+  "type": "article",
+  "cited_by_count": 83602,
+  "is_open_access": true,
+  "open_access_url": "https://hal.science/hal-04206682",
+  "abstract": null,
+  "openalex_id": "https://openalex.org/W2919115771",
+  "source": "OpenAlex (openalex.org), via AgentFeed (x402.ochinimus.app)",
+  "license": "CC0",
+  "fetched_at": "2026-10-14T15:25:31.721Z"
+}

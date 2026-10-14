@@ -1,0 +1,188 @@
+{
+    "actorSpecification": 1,
+    "title": "Scholarly Paper Search: one item per paper",
+    "description": "Papers from OpenAlex (CC0 data), found by a search or by a DOI.",
+    "fields": {
+        "type": "object",
+        "properties": {
+            "query": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Search query",
+                "description": "The search text that found this paper. Empty (null) for a DOI lookup.",
+                "example": "large language models"
+            },
+            "title": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Title",
+                "description": "Title of the paper."
+            },
+            "year": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "title": "Year",
+                "description": "Publication year as OpenAlex records it."
+            },
+            "doi": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "DOI",
+                "description": "DOI of the paper, without the https://doi.org/ prefix.",
+                "example": "10.1038/nature14539"
+            },
+            "authors": {
+                "type": "array",
+                "title": "Authors",
+                "description": "Author names in the order OpenAlex lists them, up to 25.",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "authors_total": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "title": "Authors in total",
+                "description": "Number of authors OpenAlex holds; can exceed the 25 names listed."
+            },
+            "venue": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Venue",
+                "description": "Journal, conference or repository the paper appeared in."
+            },
+            "type": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Type",
+                "description": "OpenAlex work type, for example article, review or preprint."
+            },
+            "cited_by_count": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "title": "Cited by",
+                "description": "Number of citations OpenAlex counts. This is not Google Scholar's count."
+            },
+            "is_open_access": {
+                "type": "boolean",
+                "title": "Open access",
+                "description": "True when OpenAlex knows a free-to-read copy."
+            },
+            "open_access_url": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Open-access link",
+                "description": "Link to a free-to-read copy, when OpenAlex knows one."
+            },
+            "abstract": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Abstract",
+                "description": "Abstract text (up to 4,000 characters) where OpenAlex holds it. Only DOI lookups carry it; search results leave it empty."
+            },
+            "openalex_id": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "OpenAlex ID",
+                "description": "OpenAlex identifier of the work, a link such as https://openalex.org/W2919115771."
+            },
+            "source": {
+                "type": "string",
+                "title": "Source",
+                "description": "Where the data comes from."
+            },
+            "license": {
+                "type": "string",
+                "title": "Data licence",
+                "description": "Licence of the data: OpenAlex data is CC0 (public domain)."
+            },
+            "fetched_at": {
+                "type": "string",
+                "title": "Fetched at",
+                "description": "When this actor fetched the data (ISO 8601, UTC)."
+            }
+        },
+        "required": [
+            "source",
+            "license",
+            "fetched_at"
+        ]
+    },
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "description": "One row per paper.",
+            "transformation": {
+                "fields": [
+                    "query",
+                    "title",
+                    "year",
+                    "authors",
+                    "venue",
+                    "cited_by_count",
+                    "doi",
+                    "open_access_url"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "query": {
+                        "label": "Query",
+                        "format": "text"
+                    },
+                    "title": {
+                        "label": "Title",
+                        "format": "text"
+                    },
+                    "year": {
+                        "label": "Year",
+                        "format": "number"
+                    },
+                    "authors": {
+                        "label": "Authors",
+                        "format": "array"
+                    },
+                    "venue": {
+                        "label": "Venue",
+                        "format": "text"
+                    },
+                    "cited_by_count": {
+                        "label": "Cited by",
+                        "format": "number"
+                    },
+                    "doi": {
+                        "label": "DOI",
+                        "format": "text"
+                    },
+                    "open_access_url": {
+                        "label": "Open access",
+                        "format": "link"
+                    }
+                }
+            }
+        }
+    }
+}

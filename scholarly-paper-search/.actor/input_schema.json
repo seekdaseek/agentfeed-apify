@@ -1,0 +1,42 @@
+{
+    "title": "Scholarly Paper Search",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "queries": {
+            "title": "Search queries",
+            "type": "array",
+            "description": "Topics to search, one search per line (up to 200 characters each, up to 20 queries). Every paper found becomes one result. Leave empty to search nothing and use only the DOIs.",
+            "editor": "stringList",
+            "prefill": [
+                "large language models"
+            ],
+            "maxItems": 20
+        },
+        "dois": {
+            "title": "DOIs to look up",
+            "type": "array",
+            "description": "DOIs of papers to fetch, one per line, e.g. 10.1038/nature14539 or https://doi.org/10.1038/nature14539 (up to 50). Each DOI found becomes one result and includes the abstract where OpenAlex holds it.",
+            "editor": "stringList",
+            "prefill": [
+                "10.1038/nature14539"
+            ],
+            "maxItems": 50
+        },
+        "year_from": {
+            "title": "Earliest publication year",
+            "type": "integer",
+            "description": "Optional. Only papers published in this year or later are returned by the searches. It does not apply to DOI lookups.",
+            "minimum": 1000,
+            "maximum": 2100
+        },
+        "max_results_per_query": {
+            "title": "Papers per search",
+            "type": "integer",
+            "description": "How many papers each search returns, 1 to 25. Every paper returned is one charged result.",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 25
+        }
+    }
+}
