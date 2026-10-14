@@ -108,3 +108,15 @@ test('end to end with the real client and mapper: a non-PDF (400), a private add
     assert.ok(lines.some((m) => m.includes('example.com') && m.includes('content type text/html') && m.includes('nothing charged')));
     assert.ok(lines.some((m) => m.includes('scan.test') && m.includes('nothing to return')));
 });
+
+// test/fixtures/scanned.pdf is served from raw.githubusercontent.com for the live check of this rule (the host's robots.txt answers 404).
+// It is one page holding one picture of text and no text layer: pdfminer and pypdf both read 0 words and 0 fonts from it.
+const looksImageOnly = (buf) => buf.subarray(0, 5).toString('latin1') === '%PDF-' && buf.includes('/Subtype /Image') && !buf.includes('/Font');
+
+test('fixture scanned.pdf is a small image-only PDF, and the check can tell a PDF with fonts apart', () => {
+    const buf = fs.readFileSync(new URL('./fixtures/scanned.pdf', import.meta.url));
+    assert.ok(buf.length > 10000 && buf.length < 200000, `size ${buf.length}`);
+    assert.ok(looksImageOnly(buf));
+    assert.equal(looksImageOnly(Buffer.from('%PDF-1.4 /Subtype /Image /Font')), false, 'control: a PDF that declares a font is not image-only');
+    assert.equal(looksImageOnly(Buffer.from('not a pdf /Subtype /Image')), false);
+});
