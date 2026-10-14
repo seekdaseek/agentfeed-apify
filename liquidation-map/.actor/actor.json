@@ -8,6 +8,7 @@
     "dockerfile": "../Dockerfile",
     "readme": "../README.md",
     "input": "./input_schema.json",
+    "defaultMemoryMbytes": 256,
     "environmentVariables": {
         "AGENTFEED_KEY": "@agentfeedKey"
     }
