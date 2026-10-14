@@ -1,8 +1,8 @@
 {
     "actorSpecification": 1,
     "name": "crypto-liquidation-map-hyperliquid",
-    "title": "Crypto Liquidation Map: real Hyperliquid positions",
-    "description": "Liquidation levels of BTC, ETH, SOL and any Hyperliquid perp, computed from the actual open positions of the largest Hyperliquid accounts. Not leverage estimates.",
+    "title": "Crypto Liquidation Heatmap & Map: real Hyperliquid positions",
+    "description": "Liquidation heatmap data for BTC, ETH, SOL and any Hyperliquid perp: USD at risk in each price band, from the real open positions of the largest Hyperliquid accounts. Not leverage estimates.",
     "version": "1.0",
     "buildTag": "latest",
     "dockerfile": "../Dockerfile",

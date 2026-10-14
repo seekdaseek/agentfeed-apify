@@ -1,16 +1,19 @@
 # agentfeed-apify
 
-[Apify](https://apify.com) actors that sell [AgentFeed](https://x402.ochinimus.app) liquidation data to people who pay in dollars instead of USDC per call.
+[Apify](https://apify.com) actors that sell [AgentFeed](https://x402.ochinimus.app) data to people who pay in dollars instead of USDC per call.
 
 | Actor | Folder | What it returns | AgentFeed route |
 |---|---|---|---|
 | Crypto Liquidation Map: real Hyperliquid positions | [`liquidation-map/`](liquidation-map) | Liquidation levels in 5% price bands from the open positions of the largest Hyperliquid accounts | `/api/hl-whales?coin=` |
+| Scholarly Paper Search: OpenAlex, Google Scholar alternative | [`scholarly-paper-search/`](scholarly-paper-search) | Papers from OpenAlex (CC0 data) by search or DOI: title, year, authors, venue, citations, open-access link | `/api/papers`, `/api/paper/{doi}` |
+| SEC EDGAR Filings by Ticker: 10-K, 10-Q, 8-K, Form 4 | [`sec-edgar-filings/`](sec-edgar-filings) | Recent public filings per ticker with dates, accession numbers, 8-K items and links | `/api/sec-filings` |
+| PDF to Markdown: clean text from any PDF URL | [`pdf-to-markdown/`](pdf-to-markdown) | Page-by-page markdown text of text-layer PDFs | `/api/pdf-markdown` |
 
-Each folder is a complete actor: its `README.md` is the Apify Store listing.
+Each folder is a complete actor: its `README.md` is the Apify Store listing. Each actor calls AgentFeed with its own key, stored only as an Apify secret.
 
 ## How it works
 
-Per input item the actor makes one GET to `https://x402.ochinimus.app` with its AgentFeed key in the `X-AgentFeed-Key` header and pushes one dataset item with a pay-per-event charge (`Actor.pushData(item, eventName)`). A non-200 answer, or a 200 with nothing in it, pushes no item and so charges nothing. A rejected key (401, 402, 403) stops the run and fails it.
+Per input item each actor makes one GET to `https://x402.ochinimus.app` with its AgentFeed key in the `X-AgentFeed-Key` header and pushes one dataset item with a pay-per-event charge (`Actor.pushData(item, eventName)`). A non-200 answer, or a 200 with nothing in it, pushes no item and so charges nothing. A rejected key (401, 402, 403) stops the run and fails it. The actors that can return several items per request (papers, filings, PDFs) process one input at a time through `shared/multi.js`.
 
 ## The key
 
