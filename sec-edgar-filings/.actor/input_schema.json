@@ -1,0 +1,31 @@
+{
+    "title": "SEC EDGAR Filings by Ticker",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "tickers": {
+            "title": "Tickers",
+            "type": "array",
+            "description": "US-listed tickers, one per line, e.g. AAPL, MSFT or BRK-B (up to 50). Every filing found is one result. A symbol that is not in the SEC's company ticker list returns nothing and is not charged.",
+            "editor": "stringList",
+            "prefill": [
+                "AAPL"
+            ],
+            "maxItems": 50
+        },
+        "form": {
+            "title": "Form type",
+            "type": "string",
+            "description": "Optional. Return only this EDGAR form type, for example 10-K, 10-Q, 8-K, 4, S-1, DEF 14A or 13F-HR. Leave empty for the most recent filings of any type.",
+            "editor": "textfield"
+        },
+        "limit_per_ticker": {
+            "title": "Filings per ticker",
+            "type": "integer",
+            "description": "How many of the most recent filings to return for each ticker, 1 to 50. Every filing returned is one charged result.",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 50
+        }
+    }
+}

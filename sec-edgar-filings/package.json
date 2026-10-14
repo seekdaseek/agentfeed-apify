@@ -1,0 +1,21 @@
+{
+  "name": "agentfeed-sec-edgar-filings",
+  "version": "1.0.0",
+  "description": "Apify actor: recent SEC EDGAR filings by ticker (10-K, 10-Q, 8-K, Form 4 and more), via AgentFeed.",
+  "type": "module",
+  "license": "MIT",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test test/map.test.js test/schema.test.js"
+  },
+  "dependencies": {
+    "apify": "^3.7.2"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

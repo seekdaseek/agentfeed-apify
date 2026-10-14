@@ -1,0 +1,15 @@
+{
+  "ticker": "AAPL",
+  "company": "Apple Inc.",
+  "cik": "0000320193",
+  "form": "4",
+  "filing_date": "2026-10-08",
+  "report_date": "2026-10-06",
+  "accession_number": "0001140361-26-039158",
+  "description": "FORM 4",
+  "items": null,
+  "document_url": "https://www.sec.gov/Archives/edgar/data/320193/000114036126039158/xslF345X06/form4.xml",
+  "index_url": "https://www.sec.gov/Archives/edgar/data/320193/000114036126039158/0001140361-26-039158-index.htm",
+  "source": "SEC EDGAR (sec.gov), public filings, via AgentFeed (x402.ochinimus.app)",
+  "fetched_at": "2026-10-14T15:31:37.353Z"
+}

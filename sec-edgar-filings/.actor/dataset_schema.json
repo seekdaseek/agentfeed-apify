@@ -1,0 +1,172 @@
+{
+    "actorSpecification": 1,
+    "title": "SEC EDGAR Filings by Ticker: one item per filing",
+    "description": "Recent public filings from SEC EDGAR for each ticker.",
+    "fields": {
+        "type": "object",
+        "properties": {
+            "ticker": {
+                "type": "string",
+                "title": "Ticker",
+                "description": "The US ticker the filing belongs to.",
+                "example": "AAPL"
+            },
+            "company": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Company",
+                "description": "Company name as EDGAR records it."
+            },
+            "cik": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "CIK",
+                "description": "SEC Central Index Key of the filer, ten digits."
+            },
+            "form": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Form",
+                "description": "EDGAR form type, for example 10-K, 10-Q, 8-K or 4."
+            },
+            "filing_date": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Filing date",
+                "description": "Date the filing was accepted by EDGAR (YYYY-MM-DD)."
+            },
+            "report_date": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Report date",
+                "description": "Period or event date the filing reports on (YYYY-MM-DD). Empty when the form has none."
+            },
+            "accession_number": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Accession number",
+                "description": "EDGAR accession number that identifies the filing.",
+                "example": "0000320193-26-000018"
+            },
+            "description": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Description",
+                "description": "Description of the primary document as EDGAR lists it. Empty for some forms."
+            },
+            "items": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "8-K items",
+                "description": "Comma-separated 8-K item codes, for example 2.02,9.01. Empty for other forms."
+            },
+            "document_url": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Document link",
+                "description": "Link to the primary document of the filing on sec.gov."
+            },
+            "index_url": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Filing index link",
+                "description": "Link to the filing's index page on sec.gov, which lists every document in it."
+            },
+            "source": {
+                "type": "string",
+                "title": "Source",
+                "description": "Where the data comes from."
+            },
+            "fetched_at": {
+                "type": "string",
+                "title": "Fetched at",
+                "description": "When this actor fetched the data (ISO 8601, UTC)."
+            }
+        },
+        "required": [
+            "ticker",
+            "source",
+            "fetched_at"
+        ]
+    },
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "description": "One row per filing, newest first.",
+            "transformation": {
+                "fields": [
+                    "ticker",
+                    "company",
+                    "form",
+                    "filing_date",
+                    "report_date",
+                    "description",
+                    "items",
+                    "document_url",
+                    "index_url"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "ticker": {
+                        "label": "Ticker",
+                        "format": "text"
+                    },
+                    "company": {
+                        "label": "Company",
+                        "format": "text"
+                    },
+                    "form": {
+                        "label": "Form",
+                        "format": "text"
+                    },
+                    "filing_date": {
+                        "label": "Filed",
+                        "format": "text"
+                    },
+                    "report_date": {
+                        "label": "Report date",
+                        "format": "text"
+                    },
+                    "description": {
+                        "label": "Description",
+                        "format": "text"
+                    },
+                    "items": {
+                        "label": "8-K items",
+                        "format": "text"
+                    },
+                    "document_url": {
+                        "label": "Document",
+                        "format": "link"
+                    },
+                    "index_url": {
+                        "label": "Filing index",
+                        "format": "link"
+                    }
+                }
+            }
+        }
+    }
+}

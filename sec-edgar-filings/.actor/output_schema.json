@@ -1,0 +1,12 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Output of SEC EDGAR Filings by Ticker",
+    "description": "One dataset item per filing.",
+    "properties": {
+        "overview": {
+            "type": "string",
+            "title": "Filings: one row per filing",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+        }
+    }
+}
