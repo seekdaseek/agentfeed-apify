@@ -1,6 +1,6 @@
-# Crypto Liquidation Map: real Hyperliquid positions
+# Crypto Liquidation Heatmap & Map: real Hyperliquid positions
 
-**Liquidation levels for BTC, ETH, SOL and any Hyperliquid perp, computed from the actual open positions of the largest Hyperliquid accounts. Not leverage estimates.**
+**Liquidation heatmap data for BTC, ETH, SOL and any Hyperliquid perp: the USD at risk in each price band, long and short, computed from the real open positions of the largest Hyperliquid accounts. Not leverage estimates.**
 
 Most liquidation maps guess: they assume a leverage mix and draw where positions would be wiped out. This actor reads what the biggest Hyperliquid accounts really hold. For every open position it takes the exchange's own liquidation price, then adds up the USD notional that sits in each price band. You get the long and short USD at risk per band, the largest individual positions with their liquidation prices, and the mark price, as one clean JSON item per coin.
 
