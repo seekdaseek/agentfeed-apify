@@ -38,6 +38,38 @@ test('a coin with bands but no positions, and one with positions but no bands, b
     check(mapCoin('X', { data: { coin: 'X', liquidation_clusters: [], top_positions: live.data.top_positions } }));
 });
 
+// The Console Output tab shows each field's title and description, so none may be missing, at any depth.
+function propertyNodes(node, path = []) {
+    const out = [];
+    for (const [key, value] of Object.entries(node.properties ?? {})) {
+        out.push([[...path, key].join('.'), value]);
+        out.push(...propertyNodes(value, [...path, key]));
+        if (value.items) out.push(...propertyNodes(value.items, [...path, `${key}[]`]));
+    }
+    return out;
+}
+
+test('every field and every nested property has a title and a description', () => {
+    const nodes = propertyNodes(dataset.fields);
+    assert.ok(nodes.length >= 38, `expected the full property tree, found ${nodes.length}`);
+    const missing = nodes.flatMap(([name, node]) => ['title', 'description'].filter((k) => typeof node[k] !== 'string' || node[k].trim() === '').map((k) => `${name}: ${k}`));
+    assert.deepEqual(missing, []);
+});
+
+test('the four fields the Output tab showed bare carry their agreed descriptions', () => {
+    const f = dataset.fields.properties;
+    assert.equal(f.mark_price.description, 'Hyperliquid mark price in USD when the positions were read.');
+    assert.equal(f.long.description, "Totals for the tracked accounts' long positions: accounts, notional USD, size-weighted entry, notional-weighted distance to liquidation, USD within 10% of liquidation, unrealized PnL.");
+    assert.equal(f.short.description, f.long.description.replace('long positions', 'short positions'));
+    assert.equal(f.source.description, 'Where the data comes from.');
+});
+
+test('control: the description check can fail (a node without one is reported)', () => {
+    const broken = { properties: { a: { title: 'A', description: 'x', properties: { b: { title: 'B' } } } } };
+    const missing = propertyNodes(broken).filter(([, n]) => typeof n.description !== 'string').map(([name]) => name);
+    assert.deepEqual(missing, ['a.b']);
+});
+
 test('control: an item missing a required field fails the schema (the check can fail)', () => {
     const item = mapCoin('BTC', live);
     delete item.source;

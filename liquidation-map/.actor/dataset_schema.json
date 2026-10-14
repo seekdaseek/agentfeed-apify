@@ -16,7 +16,8 @@
                     "number",
                     "null"
                 ],
-                "title": "Mark price (USD)"
+                "title": "Mark price (USD)",
+                "description": "Hyperliquid mark price in USD when the positions were read."
             },
             "as_of": {
                 "type": [
@@ -91,9 +92,11 @@
                             "number",
                             "null"
                         ],
-                        "title": "Unrealized PnL (USD)"
+                        "title": "Unrealized PnL (USD)",
+                        "description": "Sum of the unrealized profit or loss in USD of the long positions."
                     }
-                }
+                },
+                "description": "Totals for the tracked accounts' long positions: accounts, notional USD, size-weighted entry, notional-weighted distance to liquidation, USD within 10% of liquidation, unrealized PnL."
             },
             "short": {
                 "type": [
@@ -147,9 +150,11 @@
                             "number",
                             "null"
                         ],
-                        "title": "Unrealized PnL (USD)"
+                        "title": "Unrealized PnL (USD)",
+                        "description": "Sum of the unrealized profit or loss in USD of the short positions."
                     }
-                }
+                },
+                "description": "Totals for the tracked accounts' short positions: accounts, notional USD, size-weighted entry, notional-weighted distance to liquidation, USD within 10% of liquidation, unrealized PnL."
             },
             "liquidation_bands": {
                 "type": "array",
@@ -163,14 +168,16 @@
                                 "number",
                                 "null"
                             ],
-                            "title": "Band start price"
+                            "title": "Band start price",
+                            "description": "Lower edge of the band in USD. Each band is 5% of the mark price wide."
                         },
                         "price_to": {
                             "type": [
                                 "number",
                                 "null"
                             ],
-                            "title": "Band end price"
+                            "title": "Band end price",
+                            "description": "Upper edge of the band in USD."
                         },
                         "long_usd_at_risk": {
                             "type": [
@@ -203,7 +210,8 @@
                                 "string",
                                 "null"
                             ],
-                            "title": "Account address"
+                            "title": "Account address",
+                            "description": "Public Hyperliquid account address that holds the position."
                         },
                         "side": {
                             "type": [
@@ -218,49 +226,56 @@
                                 "number",
                                 "null"
                             ],
-                            "title": "Size (coins)"
+                            "title": "Size (coins)",
+                            "description": "Position size in coins."
                         },
                         "notional_usd": {
                             "type": [
                                 "number",
                                 "null"
                             ],
-                            "title": "Notional (USD)"
+                            "title": "Notional (USD)",
+                            "description": "Position notional in USD."
                         },
                         "entry_px": {
                             "type": [
                                 "number",
                                 "null"
                             ],
-                            "title": "Entry price"
+                            "title": "Entry price",
+                            "description": "Entry price of the position."
                         },
                         "liquidation_px": {
                             "type": [
                                 "number",
                                 "null"
                             ],
-                            "title": "Liquidation price"
+                            "title": "Liquidation price",
+                            "description": "Liquidation price of the position, as Hyperliquid reports it."
                         },
                         "liq_distance_pct": {
                             "type": [
                                 "number",
                                 "null"
                             ],
-                            "title": "Distance to liquidation (%)"
+                            "title": "Distance to liquidation (%)",
+                            "description": "Distance between the mark price and the liquidation price, in percent of the mark price."
                         },
                         "unrealized_pnl_usd": {
                             "type": [
                                 "number",
                                 "null"
                             ],
-                            "title": "Unrealized PnL (USD)"
+                            "title": "Unrealized PnL (USD)",
+                            "description": "Unrealized profit or loss of the position in USD."
                         },
                         "leverage": {
                             "type": [
                                 "number",
                                 "null"
                             ],
-                            "title": "Leverage"
+                            "title": "Leverage",
+                            "description": "Leverage of the position."
                         },
                         "margin_mode": {
                             "type": [
@@ -291,7 +306,8 @@
             },
             "source": {
                 "type": "string",
-                "title": "Source"
+                "title": "Source",
+                "description": "Where the data comes from."
             }
         },
         "required": [
