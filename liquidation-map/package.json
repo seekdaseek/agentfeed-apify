@@ -7,7 +7,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "node src/main.js",
-    "test": "node --test \"test/*.test.js\""
+    "test": "node --test test/map.test.js"
   },
   "dependencies": {
     "apify": "^3.7.2"

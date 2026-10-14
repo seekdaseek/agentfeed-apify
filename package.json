@@ -6,6 +6,6 @@
   "type": "module",
   "scripts": {
     "sync": "for f in */src/agentfeed.js; do cp shared/agentfeed.js $f; done",
-    "test": "node --test \"test/*.test.js\" \"*/test/*.test.js\""
+    "test": "node --test $(find test */test -name '*.test.js')"
   }
 }
