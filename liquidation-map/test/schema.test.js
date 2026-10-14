@@ -54,27 +54,51 @@ test('every key the mapper emits is described in the schema (drift guard)', () =
     assert.deepEqual(Object.keys(item.largest_positions[0]).sort(), Object.keys(props.largest_positions.items.properties).sort());
 });
 
-test('view columns resolve: flattened names exist in `fields`, display covers every column', () => {
+// What Apify does with a view (measured live on a real run, 14 Oct 2026): `fields` is applied first, then `unwind` merges each array
+// element's keys into its own row, and `flatten` runs BEFORE `unwind` (so flattening an array that is also unwound leaves one row with
+// only the first columns). The columns a view produces must therefore be computed in that order, and display must describe exactly them.
+function viewColumns(view, props) {
+    const flat = new Set(view.transformation.flatten ?? []);
+    const unwind = new Set(view.transformation.unwind ?? []);
+    for (const f of unwind) assert.ok(!flat.has(f), `an unwound array (${f}) must not also be flattened`);
+    const cols = [];
+    for (const col of view.transformation.fields) {
+        const [head, sub] = col.split('.');
+        assert.ok(props[head], `no field ${head}`);
+        if (unwind.has(head)) {
+            assert.equal(props[head].type, 'array', `${head} is unwound but is not an array`);
+            cols.push(...Object.keys(props[head].items.properties));
+        } else if (sub) {
+            assert.ok(flat.has(head), `${col} is nested but ${head} is not flattened`);
+            assert.ok(props[head].properties[sub], `${col} is not in the schema`);
+            cols.push(col);
+        } else {
+            cols.push(col);
+        }
+    }
+    return cols;
+}
+
+test('view columns resolve and display describes exactly the columns each view produces', () => {
     const props = dataset.fields.properties;
     for (const [id, view] of Object.entries(dataset.views)) {
-        const flat = new Set(view.transformation.flatten ?? []);
-        for (const col of view.transformation.fields) {
-            const [head, sub] = col.split('.');
-            assert.ok(props[head], `${id}: ${col} has no field ${head}`);
-            if (sub) {
-                assert.ok(flat.has(head), `${id}: ${col} is nested but ${head} is not flattened`);
-                const node = props[head].items ?? props[head];
-                assert.ok(node.properties[sub], `${id}: ${col} is not in the schema`);
-            }
-            assert.ok(view.display.properties[col], `${id}: no display entry for ${col}`);
-        }
-        assert.deepEqual(Object.keys(view.display.properties).sort(), [...view.transformation.fields].sort(), `${id}: display and transformation disagree`);
+        assert.deepEqual(Object.keys(view.display.properties).sort(), viewColumns(view, props).sort(), `${id}: display and produced columns disagree`);
     }
+});
+
+test('the bands view unwinds without flatten, keeps the array in fields, and yields the five columns the brief asked for', () => {
+    const v = dataset.views.bands;
+    assert.deepEqual(v.transformation, { unwind: ['liquidation_bands'], fields: ['coin', 'liquidation_bands'] });
+    assert.deepEqual(Object.keys(v.display.properties), ['coin', 'price_from', 'price_to', 'long_usd_at_risk', 'short_usd_at_risk']);
+});
+
+test('control: the old broken bands view (unwind and flatten the same array) is rejected by the column check', () => {
+    const broken = { transformation: { unwind: ['liquidation_bands'], flatten: ['liquidation_bands'], fields: ['coin', 'liquidation_bands.price_from'] }, display: { properties: {} } };
+    assert.throws(() => viewColumns(broken, dataset.fields.properties), /must not also be flattened/);
 });
 
 test('the overview view has the columns the brief asked for', () => {
     assert.deepEqual(dataset.views.overview.transformation.fields, ['coin', 'mark_price', 'net_usd', 'long.notional_usd', 'short.notional_usd', 'long.within_10pct_of_liq_usd', 'short.within_10pct_of_liq_usd', 'accounts_with_positions', 'as_of']);
-    assert.deepEqual(dataset.views.bands.transformation.unwind, ['liquidation_bands']);
 });
 
 test('output schema links only to views that exist', () => {

@@ -370,15 +370,9 @@
                 "unwind": [
                     "liquidation_bands"
                 ],
-                "flatten": [
-                    "liquidation_bands"
-                ],
                 "fields": [
                     "coin",
-                    "liquidation_bands.price_from",
-                    "liquidation_bands.price_to",
-                    "liquidation_bands.long_usd_at_risk",
-                    "liquidation_bands.short_usd_at_risk"
+                    "liquidation_bands"
                 ]
             },
             "display": {
@@ -388,19 +382,19 @@
                         "label": "Coin",
                         "format": "text"
                     },
-                    "liquidation_bands.price_from": {
+                    "price_from": {
                         "label": "Band from",
                         "format": "number"
                     },
-                    "liquidation_bands.price_to": {
+                    "price_to": {
                         "label": "Band to",
                         "format": "number"
                     },
-                    "liquidation_bands.long_usd_at_risk": {
+                    "long_usd_at_risk": {
                         "label": "Long USD at risk",
                         "format": "number"
                     },
-                    "liquidation_bands.short_usd_at_risk": {
+                    "short_usd_at_risk": {
                         "label": "Short USD at risk",
                         "format": "number"
                     }
