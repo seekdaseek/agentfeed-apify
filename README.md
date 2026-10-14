@@ -2,9 +2,22 @@
 
 [Apify](https://apify.com) actors that sell [AgentFeed](https://x402.ochinimus.app) data to people who pay in dollars instead of USDC per call.
 
+## On the Apify Store
+
+Four public actors, billed in fiat through Apify, so no wallet is needed. Prices are per result, plus Apify's $0.00005 start fee per run.
+
+| Folder | Store URL | Price | What it returns |
+|---|---|---|---|
+| [`liquidation-map/`](liquidation-map) | [apify.com/ochinimus/crypto-liquidation-map-hyperliquid](https://apify.com/ochinimus/crypto-liquidation-map-hyperliquid) | $0.008 per coin | Liquidation heatmap data: USD at risk in each 5% price band, from the open positions of the largest Hyperliquid accounts |
+| [`scholarly-paper-search/`](scholarly-paper-search) | [apify.com/ochinimus/scholarly-paper-search](https://apify.com/ochinimus/scholarly-paper-search) | $0.003 per paper | Papers from OpenAlex's CC0 data, by search or DOI |
+| [`us-company-filings/`](us-company-filings) | [apify.com/ochinimus/us-company-filings](https://apify.com/ochinimus/us-company-filings) | $0.002 per filing | Recent public filings from the SEC's EDGAR system, per ticker |
+| [`pdf-to-markdown/`](pdf-to-markdown) | [apify.com/ochinimus/pdf-to-markdown](https://apify.com/ochinimus/pdf-to-markdown) | $0.01 per PDF | The text of a PDF as markdown, page by page |
+
+## The AgentFeed routes behind them
+
 | Actor | Folder | What it returns | AgentFeed route |
 |---|---|---|---|
-| Crypto Liquidation Map: real Hyperliquid positions | [`liquidation-map/`](liquidation-map) | Liquidation levels in 5% price bands from the open positions of the largest Hyperliquid accounts | `/api/hl-whales?coin=` |
+| Crypto Liquidation Heatmap & Map: real Hyperliquid positions | [`liquidation-map/`](liquidation-map) | Liquidation levels in 5% price bands from the open positions of the largest Hyperliquid accounts | `/api/hl-whales?coin=` |
 | Scholarly Paper Search: OpenAlex, Google Scholar alternative | [`scholarly-paper-search/`](scholarly-paper-search) | Papers from OpenAlex (CC0 data) by search or DOI: title, year, authors, venue, citations, open-access link | `/api/papers`, `/api/paper/{doi}` |
 | US Company Filings by Ticker: 10-K, 10-Q, 8-K, Form 4 | [`us-company-filings/`](us-company-filings) | Recent public filings from the SEC's EDGAR system per ticker, with dates, accession numbers, 8-K items and links | `/api/sec-filings` |
 | PDF to Markdown: clean text from any PDF URL | [`pdf-to-markdown/`](pdf-to-markdown) | Page-by-page markdown text of text-layer PDFs | `/api/pdf-markdown` |
