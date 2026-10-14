@@ -12,11 +12,34 @@ Most liquidation maps guess: they assume a leverage mix and draw where positions
 - **Mark price, net USD, `as_of` (when the positions were read) and `fetched_at`.**
 - A `source` line on every item.
 
+## Use cases
+
+- See at which prices the largest Hyperliquid accounts would be liquidated, coin by coin, from their real liquidation prices.
+- Compare long against short USD at risk around the mark price, band by band.
+- Watch the biggest open positions in a coin: account, side, entry, liquidation price, leverage and unrealized PnL.
+- Feed a bot, spreadsheet or dashboard: run the actor on an Apify schedule or call it through the API. The positions behind it are refreshed every 5 minutes at most, so polling faster returns the same snapshot (`as_of` tells you).
+- Export the results as JSON, CSV or Excel.
+
 ## Input
 
 | Field | Type | Default | Description |
 |---|---|---|---|
 | `coins` | array of strings | `["BTC","ETH","SOL"]` | Hyperliquid perp symbols, e.g. `BTC`, `ETH`, `SOL`, `HYPE`, `DOGE`. Case does not matter. Up to 50 per run. |
+
+## How to run it
+
+**In the Apify Console:** open the Actor, enter the coins in the Input tab (one symbol per line; the default is BTC, ETH and SOL) and click Start. The dataset has two table views, **Overview** (one row per coin) and **Liquidation bands** (one row per 5% band and coin), and can be exported as JSON, CSV or Excel.
+
+**Through the API:** one request starts a run and returns the items (replace `YOUR_API_TOKEN` with your Apify API token):
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/ochinimus~crypto-liquidation-map-hyperliquid/run-sync-get-dataset-items" \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"coins": ["BTC", "ETH"]}'
+```
+
+The answer is a JSON array with one item per coin that returned data. See the Apify API docs for asynchronous runs and schedules.
 
 ## Sample output
 
