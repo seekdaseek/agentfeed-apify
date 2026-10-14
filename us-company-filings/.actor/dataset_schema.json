@@ -1,7 +1,7 @@
 {
     "actorSpecification": 1,
-    "title": "SEC EDGAR Filings by Ticker: one item per filing",
-    "description": "Recent public filings from SEC EDGAR for each ticker.",
+    "title": "US Company Filings by Ticker: one item per filing",
+    "description": "Recent public filings from the SEC's EDGAR system for each ticker.",
     "fields": {
         "type": "object",
         "properties": {
@@ -95,7 +95,7 @@
             "source": {
                 "type": "string",
                 "title": "Source",
-                "description": "Where the data comes from."
+                "description": "Where the data comes from: public filings from the SEC's EDGAR system."
             },
             "fetched_at": {
                 "type": "string",

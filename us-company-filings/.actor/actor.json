@@ -1,8 +1,8 @@
 {
     "actorSpecification": 1,
-    "name": "sec-edgar-filings",
-    "title": "SEC EDGAR Filings by Ticker: 10-K, 10-Q, 8-K, Form 4",
-    "description": "Recent SEC EDGAR filings for any US ticker: 10-K, 10-Q, 8-K, Form 4, S-1, 13F-HR and more, with filing date, accession number, 8-K item codes and links to the document and the filing index.",
+    "name": "us-company-filings",
+    "title": "US Company Filings by Ticker: 10-K, 10-Q, 8-K, Form 4",
+    "description": "Recent public filings from the SEC's EDGAR system for any US ticker: 10-K, 10-Q, 8-K, Form 4, S-1, 13F-HR and more, with filing date, accession number, 8-K item codes and links to the document and the filing index.",
     "version": "1.0",
     "buildTag": "latest",
     "dockerfile": "../Dockerfile",

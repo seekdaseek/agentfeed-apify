@@ -1,7 +1,7 @@
-// Input handling and mapping for AgentFeed's /api/sec-filings (recent EDGAR filings for one ticker).
+// Input handling and mapping for AgentFeed's /api/sec-filings (recent public filings from the SEC's EDGAR system for one ticker).
 
 export const EVENT_NAME = 'filing';
-export const SOURCE = 'SEC EDGAR (sec.gov), public filings, via AgentFeed (x402.ochinimus.app)';
+export const SOURCE = 'SEC EDGAR (public)';
 export const DEFAULT_TICKERS = ['AAPL'];
 export const DEFAULT_LIMIT = 10;
 export const MAX_TICKERS = 50;

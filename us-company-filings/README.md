@@ -1,6 +1,6 @@
-# SEC EDGAR Filings by Ticker: 10-K, 10-Q, 8-K, Form 4
+# US Company Filings by Ticker: 10-K, 10-Q, 8-K, Form 4
 
-**Recent SEC EDGAR filings for any US-listed ticker, one clean JSON item per filing: form type, filing date, report date, accession number, description, 8-K item codes and links to the document and the filing index.**
+**Recent public filings from the SEC's EDGAR system for any US-listed ticker, one clean JSON item per filing: form type, filing date, report date, accession number, description, 8-K item codes and links to the document and the filing index.**
 
 Give the actor a list of tickers and, optionally, one form type. It reads each company's filing list from EDGAR at the moment you run it and returns the most recent filings, newest first. No scraping, no proxies, no HTML parsing, and no need to look up CIK numbers: the ticker is enough.
 
@@ -40,7 +40,7 @@ With no input at all, the actor returns the 10 most recent filings of `AAPL`, so
 **Through the API:** one request starts a run and returns the items (replace `YOUR_API_TOKEN` with your Apify API token):
 
 ```bash
-curl -X POST "https://api.apify.com/v2/acts/ochinimus~sec-edgar-filings/run-sync-get-dataset-items" \
+curl -X POST "https://api.apify.com/v2/acts/ochinimus~us-company-filings/run-sync-get-dataset-items" \
   -H "Authorization: Bearer YOUR_API_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"tickers": ["AAPL", "MSFT"], "form": "8-K", "limit_per_ticker": 5}'
@@ -66,8 +66,8 @@ Two real results, captured live on 14 Oct 2026 (an insider Form 4 and an 8-K wit
     "items": null,
     "document_url": "https://www.sec.gov/Archives/edgar/data/320193/000114036126039158/xslF345X06/form4.xml",
     "index_url": "https://www.sec.gov/Archives/edgar/data/320193/000114036126039158/0001140361-26-039158-index.htm",
-    "source": "SEC EDGAR (sec.gov), public filings, via AgentFeed (x402.ochinimus.app)",
-    "fetched_at": "2026-10-14T15:31:37.353Z"
+    "source": "SEC EDGAR (public)",
+    "fetched_at": "2026-10-14T16:16:40.290Z"
   },
   {
     "ticker": "AAPL",
@@ -81,8 +81,8 @@ Two real results, captured live on 14 Oct 2026 (an insider Form 4 and an 8-K wit
     "items": "2.02,9.01",
     "document_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000018/aapl-20260730.htm",
     "index_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000018/0000320193-26-000018-index.htm",
-    "source": "SEC EDGAR (sec.gov), public filings, via AgentFeed (x402.ochinimus.app)",
-    "fetched_at": "2026-10-14T15:31:53.624Z"
+    "source": "SEC EDGAR (public)",
+    "fetched_at": "2026-10-14T16:16:44.458Z"
   }
 ]
 ```
@@ -95,8 +95,8 @@ You are charged only for filings that come back. A ticker that is not in the SEC
 
 ## Data source and its limits
 
-- **Source: SEC EDGAR (sec.gov), public filings, through AgentFeed (x402.ochinimus.app).** EDGAR is public: its filings are free to access and reuse. This actor cites the source on every item.
-- **Not affiliated with the U.S. Securities and Exchange Commission,** and not endorsed by it.
+- **Source: public filings from the SEC's EDGAR system (sec.gov), through AgentFeed (x402.ochinimus.app).** EDGAR is public: its filings are free to access and reuse. Every item carries the source line `SEC EDGAR (public)`.
+- **Not affiliated with or endorsed by the U.S. Securities and Exchange Commission (SEC).**
 - **Metadata and links, not filing text.** You get the filing's date, form, description and links; open the document link for the content.
 - **US-listed tickers only**, as listed in the SEC's company ticker list. Foreign private issuers file different forms (for example 6-K and 20-F), so use the `form` field accordingly.
 - **Most recent first, up to 50 per ticker.** The list is read from EDGAR at request time, so it is as current as EDGAR's own publication.
@@ -108,4 +108,4 @@ You are charged only for filings that come back. A ticker that is not in the SEC
 
 The same data is sold per call to AI agents over the x402 protocol (USDC, no account): [x402.ochinimus.app](https://x402.ochinimus.app), route `/api/sec-filings`, OpenAPI at [x402.ochinimus.app/openapi.json](https://x402.ochinimus.app/openapi.json).
 
-Source code: [github.com/seekdaseek/agentfeed-apify](https://github.com/seekdaseek/agentfeed-apify) (MIT), folder `sec-edgar-filings`.
+Source code: [github.com/seekdaseek/agentfeed-apify](https://github.com/seekdaseek/agentfeed-apify) (MIT), folder `us-company-filings`.

@@ -1,6 +1,6 @@
 {
     "actorOutputSchemaVersion": 1,
-    "title": "Output of SEC EDGAR Filings by Ticker",
+    "title": "Output of US Company Filings by Ticker",
     "description": "One dataset item per filing.",
     "properties": {
         "overview": {

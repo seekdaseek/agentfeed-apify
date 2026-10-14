@@ -121,3 +121,35 @@ test('end to end with the real client and mapper: a 400 ticker, a 503, an empty 
     assert.ok(lines.some((m) => m.startsWith('ticker DOWN:') && m.includes('Not charged')));
     assert.ok(calls.every((s) => s.includes('limit=10')));
 });
+
+// The SEC asks that "SEC" and "EDGAR" not appear in a trade name, trademark or domain name (docs/SOURCES.md). Citing the source is
+// required and allowed in descriptions and the README body; titles, names, the README heading and schema titles stay clean.
+test('naming: no SEC or EDGAR in the actor name, title, package name, README heading or any schema title; the source line is the agreed one', () => {
+    const read = (p) => JSON.parse(fs.readFileSync(new URL(p, import.meta.url), 'utf8'));
+    const actor = read('../.actor/actor.json');
+    const input = read('../.actor/input_schema.json');
+    const dataset = read('../.actor/dataset_schema.json');
+    const output = read('../.actor/output_schema.json');
+    const pkg = read('../package.json');
+    const readme = fs.readFileSync(new URL('../README.md', import.meta.url), 'utf8');
+    const clean = [
+        ['actor name', actor.name], ['actor title', actor.title], ['package name', pkg.name], ['README H1', readme.split('\n')[0]],
+        ['input title', input.title], ['dataset title', dataset.title], ['output title', output.title],
+        ...Object.entries(dataset.views).map(([id, v]) => [`view ${id} title`, v.title]),
+        ...Object.entries(output.properties).map(([id, p]) => [`output property ${id} title`, p.title]),
+        ...Object.entries(input.properties).map(([id, p]) => [`input field ${id} title`, p.title]),
+        ...Object.entries(dataset.fields.properties).map(([id, p]) => [`dataset field ${id} title`, p.title]),
+    ];
+    for (const [what, text] of clean) assert.doesNotMatch(text, /\b(sec|edgar)\b/i, `${what}: ${text}`);
+    assert.equal(actor.name, 'us-company-filings');
+    assert.equal(actor.title, 'US Company Filings by Ticker: 10-K, 10-Q, 8-K, Form 4');
+    assert.equal(SOURCE, 'SEC EDGAR (public)');
+    assert.match(actor.description, /public filings from the SEC's EDGAR system/);
+    assert.match(readme, /not affiliated with or endorsed by the U\.S\. Securities and Exchange Commission/i);
+    assert.match(readme, /ochinimus~us-company-filings\/run-sync-get-dataset-items/);
+});
+
+test('control: the naming check can fail (the old title is caught)', () => {
+    assert.match('SEC EDGAR Filings by Ticker: 10-K, 10-Q, 8-K, Form 4', /\b(sec|edgar)\b/i);
+    assert.doesNotMatch('US Company Filings by Ticker: 10-K, 10-Q, 8-K, Form 4', /\b(sec|edgar)\b/i);
+});

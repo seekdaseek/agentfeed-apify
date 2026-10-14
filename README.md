@@ -6,7 +6,7 @@
 |---|---|---|---|
 | Crypto Liquidation Map: real Hyperliquid positions | [`liquidation-map/`](liquidation-map) | Liquidation levels in 5% price bands from the open positions of the largest Hyperliquid accounts | `/api/hl-whales?coin=` |
 | Scholarly Paper Search: OpenAlex, Google Scholar alternative | [`scholarly-paper-search/`](scholarly-paper-search) | Papers from OpenAlex (CC0 data) by search or DOI: title, year, authors, venue, citations, open-access link | `/api/papers`, `/api/paper/{doi}` |
-| SEC EDGAR Filings by Ticker: 10-K, 10-Q, 8-K, Form 4 | [`sec-edgar-filings/`](sec-edgar-filings) | Recent public filings per ticker with dates, accession numbers, 8-K items and links | `/api/sec-filings` |
+| US Company Filings by Ticker: 10-K, 10-Q, 8-K, Form 4 | [`us-company-filings/`](us-company-filings) | Recent public filings from the SEC's EDGAR system per ticker, with dates, accession numbers, 8-K items and links | `/api/sec-filings` |
 | PDF to Markdown: clean text from any PDF URL | [`pdf-to-markdown/`](pdf-to-markdown) | Page-by-page markdown text of text-layer PDFs | `/api/pdf-markdown` |
 
 Each folder is a complete actor: its `README.md` is the Apify Store listing. Each actor calls AgentFeed with its own key, stored only as an Apify secret.
