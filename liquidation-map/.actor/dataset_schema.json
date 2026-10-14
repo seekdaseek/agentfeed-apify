@@ -1,0 +1,411 @@
+{
+    "actorSpecification": 1,
+    "title": "Crypto Liquidation Map: one item per coin",
+    "description": "Hyperliquid liquidation levels from the open positions of the largest accounts.",
+    "fields": {
+        "type": "object",
+        "properties": {
+            "coin": {
+                "type": "string",
+                "title": "Coin",
+                "description": "Hyperliquid perp symbol.",
+                "example": "BTC"
+            },
+            "mark_price": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "title": "Mark price (USD)"
+            },
+            "as_of": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Positions read at",
+                "description": "When the data source read the positions (ISO 8601, UTC)."
+            },
+            "fetched_at": {
+                "type": "string",
+                "title": "Fetched at",
+                "description": "When this actor fetched the data (ISO 8601, UTC)."
+            },
+            "net_usd": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "title": "Net position (USD)",
+                "description": "Long notional minus short notional of the tracked accounts. Negative means net short."
+            },
+            "long": {
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "title": "Long side",
+                "properties": {
+                    "accounts": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Accounts",
+                        "description": "How many tracked accounts hold a position on this side."
+                    },
+                    "notional_usd": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Notional (USD)",
+                        "description": "Total notional of the positions on this side."
+                    },
+                    "avg_entry_px": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Average entry price",
+                        "description": "Size-weighted entry price."
+                    },
+                    "avg_liq_distance_pct": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Average distance to liquidation (%)",
+                        "description": "Notional-weighted distance between the mark price and the liquidation price."
+                    },
+                    "within_10pct_of_liq_usd": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "USD within 10% of liquidation",
+                        "description": "Notional of positions whose liquidation price is within 10% of the mark."
+                    },
+                    "unrealized_pnl_usd": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Unrealized PnL (USD)"
+                    }
+                }
+            },
+            "short": {
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "title": "Short side",
+                "properties": {
+                    "accounts": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Accounts",
+                        "description": "How many tracked accounts hold a position on this side."
+                    },
+                    "notional_usd": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Notional (USD)",
+                        "description": "Total notional of the positions on this side."
+                    },
+                    "avg_entry_px": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Average entry price",
+                        "description": "Size-weighted entry price."
+                    },
+                    "avg_liq_distance_pct": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Average distance to liquidation (%)",
+                        "description": "Notional-weighted distance between the mark price and the liquidation price."
+                    },
+                    "within_10pct_of_liq_usd": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "USD within 10% of liquidation",
+                        "description": "Notional of positions whose liquidation price is within 10% of the mark."
+                    },
+                    "unrealized_pnl_usd": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Unrealized PnL (USD)"
+                    }
+                }
+            },
+            "liquidation_bands": {
+                "type": "array",
+                "title": "Liquidation bands",
+                "description": "Bands 5% of the mark price wide, from -50% to +50% around the mark. Bands with no positions are left out.",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "price_from": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "title": "Band start price"
+                        },
+                        "price_to": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "title": "Band end price"
+                        },
+                        "long_usd_at_risk": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "title": "Long USD at risk",
+                            "description": "Notional of long positions whose liquidation price falls in the band."
+                        },
+                        "short_usd_at_risk": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "title": "Short USD at risk",
+                            "description": "Notional of short positions whose liquidation price falls in the band."
+                        }
+                    }
+                }
+            },
+            "largest_positions": {
+                "type": "array",
+                "title": "Largest positions",
+                "description": "The largest open positions in this coin among the tracked accounts, biggest notional first (up to 20).",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "address": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "title": "Account address"
+                        },
+                        "side": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "title": "Side",
+                            "description": "long or short"
+                        },
+                        "size": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "title": "Size (coins)"
+                        },
+                        "notional_usd": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "title": "Notional (USD)"
+                        },
+                        "entry_px": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "title": "Entry price"
+                        },
+                        "liquidation_px": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "title": "Liquidation price"
+                        },
+                        "liq_distance_pct": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "title": "Distance to liquidation (%)"
+                        },
+                        "unrealized_pnl_usd": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "title": "Unrealized PnL (USD)"
+                        },
+                        "leverage": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "title": "Leverage"
+                        },
+                        "margin_mode": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "title": "Margin mode",
+                            "description": "cross or isolated"
+                        }
+                    }
+                }
+            },
+            "accounts_scanned": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "title": "Accounts scanned",
+                "description": "How many of the largest Hyperliquid accounts were read."
+            },
+            "accounts_with_positions": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "title": "Accounts with positions",
+                "description": "How many of the scanned accounts hold any open perp position."
+            },
+            "source": {
+                "type": "string",
+                "title": "Source"
+            }
+        },
+        "required": [
+            "coin",
+            "fetched_at",
+            "source"
+        ]
+    },
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "description": "One row per coin: mark price, long and short notional, and how much sits within 10% of liquidation.",
+            "transformation": {
+                "flatten": [
+                    "long",
+                    "short"
+                ],
+                "fields": [
+                    "coin",
+                    "mark_price",
+                    "net_usd",
+                    "long.notional_usd",
+                    "short.notional_usd",
+                    "long.within_10pct_of_liq_usd",
+                    "short.within_10pct_of_liq_usd",
+                    "accounts_with_positions",
+                    "as_of"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "coin": {
+                        "label": "Coin",
+                        "format": "text"
+                    },
+                    "mark_price": {
+                        "label": "Mark price",
+                        "format": "number"
+                    },
+                    "net_usd": {
+                        "label": "Net USD",
+                        "format": "number"
+                    },
+                    "long.notional_usd": {
+                        "label": "Long notional USD",
+                        "format": "number"
+                    },
+                    "short.notional_usd": {
+                        "label": "Short notional USD",
+                        "format": "number"
+                    },
+                    "long.within_10pct_of_liq_usd": {
+                        "label": "Long USD within 10% of liq.",
+                        "format": "number"
+                    },
+                    "short.within_10pct_of_liq_usd": {
+                        "label": "Short USD within 10% of liq.",
+                        "format": "number"
+                    },
+                    "accounts_with_positions": {
+                        "label": "Accounts with positions",
+                        "format": "number"
+                    },
+                    "as_of": {
+                        "label": "Positions read at",
+                        "format": "date"
+                    }
+                }
+            }
+        },
+        "bands": {
+            "title": "Liquidation bands",
+            "description": "One row per 5% price band and coin: long and short USD that would be liquidated in the band.",
+            "transformation": {
+                "unwind": [
+                    "liquidation_bands"
+                ],
+                "flatten": [
+                    "liquidation_bands"
+                ],
+                "fields": [
+                    "coin",
+                    "liquidation_bands.price_from",
+                    "liquidation_bands.price_to",
+                    "liquidation_bands.long_usd_at_risk",
+                    "liquidation_bands.short_usd_at_risk"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "coin": {
+                        "label": "Coin",
+                        "format": "text"
+                    },
+                    "liquidation_bands.price_from": {
+                        "label": "Band from",
+                        "format": "number"
+                    },
+                    "liquidation_bands.price_to": {
+                        "label": "Band to",
+                        "format": "number"
+                    },
+                    "liquidation_bands.long_usd_at_risk": {
+                        "label": "Long USD at risk",
+                        "format": "number"
+                    },
+                    "liquidation_bands.short_usd_at_risk": {
+                        "label": "Short USD at risk",
+                        "format": "number"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -7,12 +7,15 @@
   "main": "src/main.js",
   "scripts": {
     "start": "node src/main.js",
-    "test": "node --test test/map.test.js"
+    "test": "node --test test/map.test.js test/schema.test.js"
   },
   "dependencies": {
     "apify": "^3.7.2"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0"
   }
 }

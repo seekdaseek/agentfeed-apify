@@ -1,0 +1,17 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Output of Crypto Liquidation Map",
+    "description": "One dataset item per coin.",
+    "properties": {
+        "overview": {
+            "type": "string",
+            "title": "Overview: one row per coin",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+        },
+        "bands": {
+            "type": "string",
+            "title": "Liquidation bands: one row per band",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=bands"
+        }
+    }
+}
