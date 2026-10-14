@@ -1,0 +1,18 @@
+{
+  "name": "agentfeed-liquidation-map",
+  "version": "1.0.0",
+  "description": "Apify actor: Hyperliquid liquidation levels from the open positions of the largest accounts, via AgentFeed.",
+  "type": "module",
+  "license": "MIT",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test \"test/*.test.js\""
+  },
+  "dependencies": {
+    "apify": "^3.7.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

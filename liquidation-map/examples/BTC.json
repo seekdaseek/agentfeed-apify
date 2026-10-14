@@ -1,0 +1,312 @@
+{
+	"coin": "BTC",
+	"mark_price": 83798,
+	"as_of": "2026-10-14T12:15:09.697Z",
+	"fetched_at": "2026-10-14T12:19:05.413Z",
+	"net_usd": -453411672.45,
+	"long": {
+		"accounts": 13,
+		"notional_usd": 283417550.64,
+		"avg_entry_px": 73993.23,
+		"avg_liq_distance_pct": 41.31,
+		"within_10pct_of_liq_usd": 0,
+		"unrealized_pnl_usd": 33169969.28
+	},
+	"short": {
+		"accounts": 23,
+		"notional_usd": 736829223.09,
+		"avg_entry_px": 78499.92,
+		"avg_liq_distance_pct": 101.75,
+		"within_10pct_of_liq_usd": 0,
+		"unrealized_pnl_usd": -46592300.49
+	},
+	"liquidation_bands": [
+		{
+			"price_from": 41899,
+			"price_to": 46088.9,
+			"long_usd_at_risk": 41900500,
+			"short_usd_at_risk": 0
+		},
+		{
+			"price_from": 46088.9,
+			"price_to": 50278.8,
+			"long_usd_at_risk": 33520400,
+			"short_usd_at_risk": 0
+		},
+		{
+			"price_from": 50278.8,
+			"price_to": 54468.7,
+			"long_usd_at_risk": 83801000,
+			"short_usd_at_risk": 0
+		},
+		{
+			"price_from": 54468.7,
+			"price_to": 58658.6,
+			"long_usd_at_risk": 83801000,
+			"short_usd_at_risk": 0
+		},
+		{
+			"price_from": 100557.6,
+			"price_to": 104747.5,
+			"long_usd_at_risk": 0,
+			"short_usd_at_risk": 25140298.32
+		},
+		{
+			"price_from": 117317.2,
+			"price_to": 121507.1,
+			"long_usd_at_risk": 0,
+			"short_usd_at_risk": 28932913.7
+		},
+		{
+			"price_from": 121507.1,
+			"price_to": 125697,
+			"long_usd_at_risk": 0,
+			"short_usd_at_risk": 66537994
+		}
+	],
+	"largest_positions": [
+		{
+			"address": "0x5b5d51203a0f9079f8aeb098a6523a13f298c060",
+			"side": "short",
+			"size": 2753.19991,
+			"notional_usd": 230712646.06,
+			"entry_px": 76168.3,
+			"liquidation_px": 143809.6513570304,
+			"liq_distance_pct": 71.61,
+			"unrealized_pnl_usd": -21005944.11,
+			"leverage": 5,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0xb83de012dba672c76a7dbbbf3e459cb59d7d6e36",
+			"side": "short",
+			"size": 2485.16462,
+			"notional_usd": 208251824.83,
+			"entry_px": 77751.1,
+			"liquidation_px": 151482.6846046699,
+			"liq_distance_pct": 80.77,
+			"unrealized_pnl_usd": -15027454.33,
+			"leverage": 5,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0x8ea85cbd59affca28162fc286d5c093dd0f8edbc",
+			"side": "long",
+			"size": 1000,
+			"notional_usd": 83801000,
+			"entry_px": 72771.2,
+			"liquidation_px": 50421.3965951382,
+			"liq_distance_pct": 39.83,
+			"unrealized_pnl_usd": 11029721.68,
+			"leverage": 3,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0x15a4f009bb324a3fb9e36137136b201e3fe0dfdb",
+			"side": "long",
+			"size": 1000,
+			"notional_usd": 83801000,
+			"entry_px": 62353.6,
+			"liquidation_px": 55621.3718676091,
+			"liq_distance_pct": 33.62,
+			"unrealized_pnl_usd": 21447345.12,
+			"leverage": 40,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0xb695651daa495f59dd2725c6fe98322d8b51a92d",
+			"side": "short",
+			"size": 794,
+			"notional_usd": 66537994,
+			"entry_px": 78724.8,
+			"liquidation_px": 122891.0793902566,
+			"liq_distance_pct": 46.65,
+			"unrealized_pnl_usd": -4030444.48,
+			"leverage": 20,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0xcfe2729438475c5eb9e8e6da6b314a0b9e2d8fb3",
+			"side": "long",
+			"size": 500,
+			"notional_usd": 41900500,
+			"entry_px": 78639.3,
+			"liquidation_px": 44682.6100064041,
+			"liq_distance_pct": 46.68,
+			"unrealized_pnl_usd": 2580827.6,
+			"leverage": 10,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0x45d26f28196d226497130c4bac709d808fed4029",
+			"side": "short",
+			"size": 436,
+			"notional_usd": 36535928,
+			"entry_px": 77001.5,
+			"liquidation_px": 160213.2594790395,
+			"liq_distance_pct": 91.19,
+			"unrealized_pnl_usd": -2963231.82,
+			"leverage": 20,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0x93ab7dbdeb996806454de19c35c8247f4b2511f8",
+			"side": "long",
+			"size": 400,
+			"notional_usd": 33520400,
+			"entry_px": 83958.1,
+			"liquidation_px": 49238.4244594709,
+			"liq_distance_pct": 41.24,
+			"unrealized_pnl_usd": -62851.49,
+			"leverage": 20,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0x7fdafde5cfb5465924316eced2d3715494c517d1",
+			"side": "short",
+			"size": 346.81006,
+			"notional_usd": 29063029.84,
+			"entry_px": 83442.3,
+			"liquidation_px": 159045.0760769458,
+			"liq_distance_pct": 89.8,
+			"unrealized_pnl_usd": -124383.8,
+			"leverage": 30,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0xebe126adabe1a8f08d3ce53b45e7cc994ca14070",
+			"side": "short",
+			"size": 345.25738,
+			"notional_usd": 28932913.7,
+			"entry_px": 85057,
+			"liquidation_px": 117363.0825600153,
+			"liq_distance_pct": 40.05,
+			"unrealized_pnl_usd": 433663.8,
+			"leverage": 20,
+			"margin_mode": "isolated"
+		},
+		{
+			"address": "0xdf954bbe619273a56e0cfa90dad8382195dc7d72",
+			"side": "short",
+			"size": 323.33893,
+			"notional_usd": 27096125.67,
+			"entry_px": 83380,
+			"liquidation_px": 177209.2859345554,
+			"liq_distance_pct": 111.47,
+			"unrealized_pnl_usd": -136120.88,
+			"leverage": 40,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0x519c721de735f7c9e6146d167852e60d60496a47",
+			"side": "short",
+			"size": 300,
+			"notional_usd": 25140300,
+			"entry_px": 79675,
+			"liquidation_px": 153214.8872782848,
+			"liq_distance_pct": 82.84,
+			"unrealized_pnl_usd": -1237800,
+			"leverage": 20,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0x469e9a7f624b04c24f0e64edf8d8a277e6bf58a5",
+			"side": "short",
+			"size": 299.99998,
+			"notional_usd": 25140298.32,
+			"entry_px": 82859.4,
+			"liquidation_px": 104494.6070575565,
+			"liq_distance_pct": 24.7,
+			"unrealized_pnl_usd": -282453.76,
+			"leverage": 25,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0x023a3d058020fb76cca98f01b3c48c8938a22355",
+			"side": "long",
+			"size": 194.95405,
+			"notional_usd": 16337344.34,
+			"entry_px": 83168.3,
+			"liquidation_px": 39109.7289570555,
+			"liq_distance_pct": 53.33,
+			"unrealized_pnl_usd": 123338.54,
+			"leverage": 40,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0xca4903c207a0df58bf37d4bc8bbc5210726f53c8",
+			"side": "short",
+			"size": 159.30363,
+			"notional_usd": 13349166.28,
+			"entry_px": 79514.5,
+			"liquidation_px": 152840.7501791747,
+			"liq_distance_pct": 82.39,
+			"unrealized_pnl_usd": -682201.91,
+			"leverage": 40,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0xdd53c5297309130ab5fe5623dc905752e3342b13",
+			"side": "short",
+			"size": 158.49216,
+			"notional_usd": 13281326.02,
+			"entry_px": 77305.5,
+			"liquidation_px": 399187.8644427181,
+			"liq_distance_pct": 376.37,
+			"unrealized_pnl_usd": -1029006.48,
+			"leverage": 3,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0xfc667adba8d4837586078f4fdcdc29804337ca06",
+			"side": "short",
+			"size": 110.6851,
+			"notional_usd": 9275190.01,
+			"entry_px": 83193,
+			"liquidation_px": 424200.9513708064,
+			"liq_distance_pct": 406.22,
+			"unrealized_pnl_usd": -66957.99,
+			"leverage": 20,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0x8607a7d180de23645db594d90621d837749408d5",
+			"side": "long",
+			"size": 110.36847,
+			"notional_usd": 9248988.15,
+			"entry_px": 109632.3,
+			"liquidation_px": 17520.0833452397,
+			"liq_distance_pct": 79.09,
+			"unrealized_pnl_usd": -2850969.59,
+			"leverage": 29,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0xedcdcaa1f18350c50c10bef860e64daa9785d05a",
+			"side": "long",
+			"size": 96.06028,
+			"notional_usd": 8049947.52,
+			"entry_px": 81597.1,
+			"liquidation_px": null,
+			"liq_distance_pct": null,
+			"unrealized_pnl_usd": 211700.48,
+			"leverage": 4,
+			"margin_mode": "cross"
+		},
+		{
+			"address": "0xf02d028ffeddc120a3ec59602a6617303ca55eb3",
+			"side": "short",
+			"size": 81.25006,
+			"notional_usd": 6808836.28,
+			"entry_px": 83281.3,
+			"liquidation_px": 173671.0597835502,
+			"liq_distance_pct": 107.25,
+			"unrealized_pnl_usd": -42219.3,
+			"leverage": 10,
+			"margin_mode": "cross"
+		}
+	],
+	"accounts_scanned": 250,
+	"accounts_with_positions": 65,
+	"source": "AgentFeed (x402.ochinimus.app), Hyperliquid on-chain positions"
+}

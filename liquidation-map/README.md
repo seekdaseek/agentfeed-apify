@@ -1,0 +1,113 @@
+# Crypto Liquidation Map: real Hyperliquid positions
+
+**Liquidation levels for BTC, ETH, SOL and any Hyperliquid perp, computed from the actual open positions of the largest Hyperliquid accounts. Not leverage estimates.**
+
+Most liquidation maps guess: they assume a leverage mix and draw where positions would be wiped out. This actor reads what the biggest Hyperliquid accounts really hold. For every open position it takes the exchange's own liquidation price, then adds up the USD notional that sits in each price band. You get the long and short USD at risk per band, the largest individual positions with their liquidation prices, and the mark price, as one clean JSON item per coin.
+
+## What you get, per coin
+
+- **Liquidation bands:** up to 20 bands, each 5% of the mark price wide, from -50% to +50% around the mark. Per band: USD notional of **long** positions and of **short** positions whose liquidation price falls in it. Bands with no positions are left out.
+- **Largest positions** (up to 20): address, side, size, notional USD, entry price, liquidation price, distance to liquidation in %, unrealized PnL, leverage, margin mode.
+- **Long and short totals:** accounts, notional, size-weighted entry, notional-weighted distance to liquidation, USD within 10% of liquidation, unrealized PnL.
+- **Mark price, net USD, `as_of` (when the positions were read) and `fetched_at`.**
+- A `source` line on every item.
+
+## Input
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `coins` | array of strings | `["BTC","ETH","SOL"]` | Hyperliquid perp symbols, e.g. `BTC`, `ETH`, `SOL`, `HYPE`, `DOGE`. Case does not matter. Up to 50 per run. |
+
+## Sample output
+
+A real result for BTC, captured live on 14 Oct 2026 and shortened for this page (2 of 7 bands, 2 of 20 positions). The full item is in [`examples/BTC.json`](https://github.com/seekdaseek/agentfeed-apify/blob/main/liquidation-map/examples/BTC.json).
+
+```json
+{
+  "coin": "BTC",
+  "mark_price": 83798,
+  "as_of": "2026-10-14T12:15:09.697Z",
+  "fetched_at": "2026-10-14T12:19:05.413Z",
+  "net_usd": -453411672.45,
+  "long": {
+    "accounts": 13,
+    "notional_usd": 283417550.64,
+    "avg_entry_px": 73993.23,
+    "avg_liq_distance_pct": 41.31,
+    "within_10pct_of_liq_usd": 0,
+    "unrealized_pnl_usd": 33169969.28
+  },
+  "short": {
+    "accounts": 23,
+    "notional_usd": 736829223.09,
+    "avg_entry_px": 78499.92,
+    "avg_liq_distance_pct": 101.75,
+    "within_10pct_of_liq_usd": 0,
+    "unrealized_pnl_usd": -46592300.49
+  },
+  "liquidation_bands": [
+    {
+      "price_from": 41899,
+      "price_to": 46088.9,
+      "long_usd_at_risk": 41900500,
+      "short_usd_at_risk": 0
+    },
+    {
+      "price_from": 117317.2,
+      "price_to": 121507.1,
+      "long_usd_at_risk": 0,
+      "short_usd_at_risk": 28932913.7
+    }
+  ],
+  "largest_positions": [
+    {
+      "address": "0x5b5d51203a0f9079f8aeb098a6523a13f298c060",
+      "side": "short",
+      "size": 2753.19991,
+      "notional_usd": 230712646.06,
+      "entry_px": 76168.3,
+      "liquidation_px": 143809.6513570304,
+      "liq_distance_pct": 71.61,
+      "unrealized_pnl_usd": -21005944.11,
+      "leverage": 5,
+      "margin_mode": "cross"
+    },
+    {
+      "address": "0xb83de012dba672c76a7dbbbf3e459cb59d7d6e36",
+      "side": "short",
+      "size": 2485.16462,
+      "notional_usd": 208251824.83,
+      "entry_px": 77751.1,
+      "liquidation_px": 151482.6846046699,
+      "liq_distance_pct": 80.77,
+      "unrealized_pnl_usd": -15027454.33,
+      "leverage": 5,
+      "margin_mode": "cross"
+    }
+  ],
+  "accounts_scanned": 250,
+  "accounts_with_positions": 65,
+  "source": "AgentFeed (x402.ochinimus.app), Hyperliquid on-chain positions"
+}
+```
+
+## Pricing
+
+Pay per event: **$0.008 per coin returned**, plus Apify's tiny per-run start fee.
+
+You are charged only for a coin that comes back with data. A coin Hyperliquid does not list, a coin none of the tracked accounts hold, or a data-source error returns no item and costs nothing.
+
+## Data source and its limits
+
+- Source: **AgentFeed (x402.ochinimus.app), Hyperliquid on-chain positions.** The positions are read from Hyperliquid's public account state; the accounts are public addresses as Hyperliquid publishes them.
+- **Hyperliquid only.** This is not the whole market: the map shows where *these accounts'* positions would be liquidated, not Binance, Bybit or OKX leverage.
+- **The largest accounts only.** The list is the top 250 accounts by account value on the Hyperliquid leaderboard, re-read hourly (`accounts_scanned` and `accounts_with_positions` are in every item). Many of them hold no position in a given coin.
+- **A snapshot, not a stream.** Positions are refreshed every 5 minutes at most. If the data source is stale it answers an error and the actor returns nothing rather than old numbers.
+- USD at risk is position **notional**, not margin.
+- This is data, not financial advice.
+
+## Built for agents too
+
+The same data is sold per call to AI agents over the x402 protocol (USDC, no account): [x402.ochinimus.app](https://x402.ochinimus.app), route `/api/hl-whales`, OpenAPI at [x402.ochinimus.app/openapi.json](https://x402.ochinimus.app/openapi.json).
+
+Source code: [github.com/seekdaseek/agentfeed-apify](https://github.com/seekdaseek/agentfeed-apify) (MIT).

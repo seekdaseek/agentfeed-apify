@@ -1,0 +1,17 @@
+{
+    "title": "Crypto Liquidation Map",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "coins": {
+            "title": "Coins",
+            "type": "array",
+            "description": "Hyperliquid perp symbols, one result per coin. Examples: BTC, ETH, SOL, HYPE, XRP, DOGE. Upper or lower case. A coin that Hyperliquid does not list, or that none of the tracked accounts hold, returns no result and is not charged.",
+            "editor": "stringList",
+            "default": ["BTC", "ETH", "SOL"],
+            "prefill": ["BTC", "ETH", "SOL"],
+            "maxItems": 50
+        }
+    },
+    "required": ["coins"]
+}
