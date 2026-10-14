@@ -5,7 +5,7 @@
   "description": "Apify actors backed by AgentFeed (x402.ochinimus.app). Root package only runs the tests and syncs shared/ into each actor.",
   "type": "module",
   "scripts": {
-    "sync": "for f in */src/agentfeed.js; do cp shared/agentfeed.js $f; done",
+    "sync": "for f in */src/agentfeed.js */src/multi.js; do cp shared/$(basename $f) $f; done",
     "test": "node --test $(find test */test -name '*.test.js')"
   }
 }

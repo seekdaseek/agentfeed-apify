@@ -2,18 +2,25 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { AUTH_STATUSES, cleanNames, collect, getAgentFeed } from '../shared/agentfeed.js';
+import { cleanList, collectMany } from '../shared/multi.js';
 
 const KEY = 'afk_TESTKEYTESTKEYTESTKEYTESTKEYTESTKEYTESTKEY00';
 const quiet = () => { const lines = []; return { lines, info: (m) => lines.push(['info', m]), warning: (m) => lines.push(['warning', m]), error: (m) => lines.push(['error', m]) }; };
 const reply = (status, body, headers = {}) => new Response(typeof body === 'string' ? body : JSON.stringify(body), { status, headers });
 
-test('every actor\'s src/agentfeed.js is byte-identical to shared/agentfeed.js', () => {
+test('every copy of a shared file is byte-identical to shared/, and every actor has agentfeed.js', () => {
     const root = new URL('../', import.meta.url);
-    const shared = fs.readFileSync(new URL('shared/agentfeed.js', root), 'utf8');
     const actors = fs.readdirSync(root, { withFileTypes: true }).filter((e) => e.isDirectory() && fs.existsSync(new URL(`${e.name}/.actor/actor.json`, root))).map((e) => e.name);
     assert.ok(actors.length > 0, 'found no actor folders');
+    const copied = fs.readdirSync(new URL('shared/', root)).filter((f) => ['agentfeed.js', 'multi.js'].includes(f));
+    assert.deepEqual(copied.sort(), ['agentfeed.js', 'multi.js']);
     for (const actor of actors) {
-        assert.equal(fs.readFileSync(new URL(`${actor}/src/agentfeed.js`, root), 'utf8'), shared, `${actor}/src/agentfeed.js drifted: run npm run sync`);
+        assert.ok(fs.existsSync(new URL(`${actor}/src/agentfeed.js`, root)), `${actor} has no src/agentfeed.js`);
+        for (const file of copied) {
+            const copy = new URL(`${actor}/src/${file}`, root);
+            if (!fs.existsSync(copy)) continue;
+            assert.equal(fs.readFileSync(copy, 'utf8'), fs.readFileSync(new URL(`shared/${file}`, root), 'utf8'), `${actor}/src/${file} drifted: run npm run sync`);
+        }
     }
 });
 
@@ -115,4 +122,52 @@ test('cleanNames: trims, upper-cases, dedupes, rejects bad symbols, falls back t
     assert.deepEqual(cleanNames([' btc ', 'BTC', 'eth', '', null, 'bad symbol!', '../x'], pattern, ['SOL']), { valid: ['BTC', 'ETH'], rejected: ['bad symbol!', '../x'] });
     assert.deepEqual(cleanNames([], pattern, ['SOL']), { valid: ['SOL'], rejected: [] });
     assert.deepEqual(cleanNames(undefined, pattern, ['SOL']), { valid: ['SOL'], rejected: [] });
+});
+
+test('collectMany: one request can yield several items, pushed together in one call', async () => {
+    const pushes = [];
+    const stats = await collectMany({ jobs: ['A'], request: async () => ({ ok: true, body: { n: 3 } }), toItems: (j, b) => [1, 2, 3].slice(0, b.n).map((i) => ({ i })), push: async (items) => { pushes.push(items); }, log: quiet() });
+    assert.deepEqual(pushes, [[{ i: 1 }, { i: 2 }, { i: 3 }]]);
+    assert.equal(stats.pushed, 3);
+});
+
+test('collectMany: a failed request, an empty answer and a throwing mapper push NOTHING; the loop continues in order, one job at a time', async () => {
+    const order = [];
+    let inFlight = 0, maxInFlight = 0;
+    const pushed = [];
+    const log = quiet();
+    const stats = await collectMany({
+        jobs: ['bad', 'empty', 'boom', 'good'],
+        request: async (j) => { inFlight++; maxInFlight = Math.max(maxInFlight, inFlight); order.push(j); await new Promise((r) => setTimeout(r, 2)); inFlight--; return j === 'bad' ? { ok: false, status: 503, reason: 'HTTP 503: allowance used up' } : { ok: true, body: j }; },
+        toItems: (j) => { if (j === 'empty') return []; if (j === 'boom') throw new Error('shape'); return { j }; },
+        push: async (items) => { pushed.push(...items); },
+        log,
+    });
+    assert.deepEqual(order, ['bad', 'empty', 'boom', 'good']);
+    assert.equal(maxInFlight, 1);
+    assert.deepEqual(pushed, [{ j: 'good' }]);
+    assert.equal(stats.failed, 1);
+    assert.equal(stats.empty, 2);
+    assert.ok(log.lines.some(([lvl, m]) => lvl === 'warning' && m.startsWith('bad:') && m.includes('allowance used up') && m.includes('nothing charged')));
+});
+
+test('collectMany: a rejected key stops at once; a charge cap stops after the push that hit it', async () => {
+    for (const status of AUTH_STATUSES) {
+        let requests = 0;
+        const stats = await collectMany({ jobs: ['A', 'B'], request: async () => { requests++; return { ok: false, status, reason: `HTTP ${status}` }; }, toItems: () => [{}], push: async () => {}, log: quiet() });
+        assert.equal(requests, 1);
+        assert.equal(stats.authFailed, true);
+    }
+    let reqs = 0;
+    const capped = await collectMany({ jobs: ['A', 'B', 'C'], request: async () => { reqs++; return { ok: true, body: {} }; }, toItems: () => [{ a: 1 }], push: async () => ({ eventChargeLimitReached: true }), log: quiet() });
+    assert.equal(reqs, 1);
+    assert.equal(capped.limitReached, true);
+});
+
+test('cleanList: trims, collapses spaces, de-duplicates case-insensitively, rejects what normalize refuses, caps at max, falls back when empty', () => {
+    const upper = (s) => (/^[A-Z]{1,5}$/i.test(s) ? s.toUpperCase() : null);
+    assert.deepEqual(cleanList([' aapl ', 'AAPL', 'msft', '', null, 'not a ticker', 'x'.repeat(30)], { normalize: upper }), { valid: ['AAPL', 'MSFT'], rejected: ['not a ticker', 'x'.repeat(30)] });
+    assert.deepEqual(cleanList(['a', 'b', 'c'], { normalize: upper, max: 2 }), { valid: ['A', 'B'], rejected: ['c (over the limit of 2)'] });
+    assert.deepEqual(cleanList([], { fallback: ['X'] }), { valid: ['X'], rejected: [] });
+    assert.deepEqual(cleanList(['  two   words '], {}), { valid: ['two words'], rejected: [] });
 });
