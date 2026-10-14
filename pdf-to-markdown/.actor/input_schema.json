@@ -1,0 +1,17 @@
+{
+    "title": "PDF to Markdown",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "urls": {
+            "title": "PDF URLs",
+            "type": "array",
+            "description": "Links to PDF files, one per line (up to 50). Each must be a public http or https URL that serves a PDF of at most 10 MB with a text layer, and whose site allows automated fetching in its robots.txt. Every PDF converted is one result. A link that cannot be fetched, is not a PDF, or holds no text returns nothing and is not charged.",
+            "editor": "stringList",
+            "prefill": [
+                "https://bitcoin.org/bitcoin.pdf"
+            ],
+            "maxItems": 50
+        }
+    }
+}

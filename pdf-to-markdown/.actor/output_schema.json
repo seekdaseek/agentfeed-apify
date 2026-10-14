@@ -1,0 +1,12 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Output of PDF to Markdown",
+    "description": "One dataset item per PDF.",
+    "properties": {
+        "overview": {
+            "type": "string",
+            "title": "PDFs: one row per PDF",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+        }
+    }
+}

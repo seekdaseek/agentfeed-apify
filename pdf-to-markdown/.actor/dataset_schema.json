@@ -1,0 +1,135 @@
+{
+    "actorSpecification": 1,
+    "title": "PDF to Markdown: one item per PDF",
+    "description": "The text of each PDF as markdown, with page, word and size counts.",
+    "fields": {
+        "type": "object",
+        "properties": {
+            "url": {
+                "type": "string",
+                "title": "URL",
+                "description": "The PDF link you supplied.",
+                "example": "https://bitcoin.org/bitcoin.pdf"
+            },
+            "final_url": {
+                "type": "string",
+                "title": "Final URL",
+                "description": "Where the PDF was actually fetched from after redirects."
+            },
+            "title": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Title",
+                "description": "Title stored in the PDF's metadata. Empty when the PDF has none."
+            },
+            "pages": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "title": "Pages",
+                "description": "Number of pages in the PDF."
+            },
+            "words": {
+                "type": "number",
+                "title": "Words",
+                "description": "Number of words in the extracted text, not counting the page headings."
+            },
+            "bytes": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "title": "Size (bytes)",
+                "description": "Size of the downloaded PDF file in bytes."
+            },
+            "truncated": {
+                "type": "boolean",
+                "title": "Truncated",
+                "description": "True when the text was longer than 300,000 characters and was cut. False means the markdown holds the whole text."
+            },
+            "markdown": {
+                "type": "string",
+                "title": "Markdown",
+                "description": "The text of the PDF as markdown, page by page, each page under a heading such as '## Page 1'."
+            },
+            "rights": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Rights note",
+                "description": "Reminder from the data source that the content belongs to its publisher and that you are responsible for your use of it."
+            },
+            "source": {
+                "type": "string",
+                "title": "Source",
+                "description": "Where the data comes from."
+            },
+            "fetched_at": {
+                "type": "string",
+                "title": "Fetched at",
+                "description": "When this actor fetched the PDF (ISO 8601, UTC)."
+            }
+        },
+        "required": [
+            "url",
+            "words",
+            "markdown",
+            "source",
+            "fetched_at"
+        ]
+    },
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "description": "One row per PDF, without the full text.",
+            "transformation": {
+                "fields": [
+                    "url",
+                    "title",
+                    "pages",
+                    "words",
+                    "bytes",
+                    "truncated",
+                    "fetched_at"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "url": {
+                        "label": "PDF",
+                        "format": "link"
+                    },
+                    "title": {
+                        "label": "Title",
+                        "format": "text"
+                    },
+                    "pages": {
+                        "label": "Pages",
+                        "format": "number"
+                    },
+                    "words": {
+                        "label": "Words",
+                        "format": "number"
+                    },
+                    "bytes": {
+                        "label": "Size (bytes)",
+                        "format": "number"
+                    },
+                    "truncated": {
+                        "label": "Truncated",
+                        "format": "boolean"
+                    },
+                    "fetched_at": {
+                        "label": "Fetched at",
+                        "format": "text"
+                    }
+                }
+            }
+        }
+    }
+}

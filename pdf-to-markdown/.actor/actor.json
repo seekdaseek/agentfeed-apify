@@ -1,0 +1,19 @@
+{
+    "actorSpecification": 1,
+    "name": "pdf-to-markdown",
+    "title": "PDF to Markdown: clean text from any PDF URL",
+    "description": "Convert PDF links to clean markdown text, page by page, with page count and word count. Works on PDFs with a text layer, up to 10 MB each; scanned images are not OCRed.",
+    "version": "1.0",
+    "buildTag": "latest",
+    "dockerfile": "../Dockerfile",
+    "readme": "../README.md",
+    "input": "./input_schema.json",
+    "output": "./output_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "defaultMemoryMbytes": 256,
+    "environmentVariables": {
+        "AGENTFEED_KEY": "@pdfKey"
+    }
+}
