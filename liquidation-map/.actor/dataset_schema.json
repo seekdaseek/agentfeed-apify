@@ -60,7 +60,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "Notional (USD)",
+                        "title": "Long notional (USD)",
                         "description": "Total notional of the positions on this side."
                     },
                     "avg_entry_px": {
@@ -84,7 +84,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "USD within 10% of liquidation",
+                        "title": "Long USD within 10% of liquidation",
                         "description": "Notional of positions whose liquidation price is within 10% of the mark."
                     },
                     "unrealized_pnl_usd": {
@@ -118,7 +118,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "Notional (USD)",
+                        "title": "Short notional (USD)",
                         "description": "Total notional of the positions on this side."
                     },
                     "avg_entry_px": {
@@ -142,7 +142,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "USD within 10% of liquidation",
+                        "title": "Short USD within 10% of liquidation",
                         "description": "Notional of positions whose liquidation price is within 10% of the mark."
                     },
                     "unrealized_pnl_usd": {
@@ -358,19 +358,19 @@
                         "format": "number"
                     },
                     "long.notional_usd": {
-                        "label": "Long notional USD",
+                        "label": "Long notional (USD)",
                         "format": "number"
                     },
                     "short.notional_usd": {
-                        "label": "Short notional USD",
+                        "label": "Short notional (USD)",
                         "format": "number"
                     },
                     "long.within_10pct_of_liq_usd": {
-                        "label": "Long USD within 10% of liq.",
+                        "label": "Long USD within 10% of liquidation",
                         "format": "number"
                     },
                     "short.within_10pct_of_liq_usd": {
-                        "label": "Short USD within 10% of liq.",
+                        "label": "Short USD within 10% of liquidation",
                         "format": "number"
                     },
                     "accounts_with_positions": {

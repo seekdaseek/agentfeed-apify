@@ -140,6 +140,36 @@ test('the overview view has the columns the brief asked for', () => {
     assert.deepEqual(dataset.views.overview.transformation.fields, ['coin', 'mark_price', 'net_usd', 'long.notional_usd', 'short.notional_usd', 'long.within_10pct_of_liq_usd', 'short.within_10pct_of_liq_usd', 'accounts_with_positions', 'as_of']);
 });
 
+// The Console Output tab shows the schema title of a nested field, so long.* and short.* must not share a title: a buyer reading
+// "Notional (USD)" twice cannot tell the long total from the short one. These are the two pairs the Overview view shows.
+const SIDE_PAIRS = [
+    ['notional_usd', 'notional (USD)'],
+    ['within_10pct_of_liq_usd', 'USD within 10% of liquidation'],
+];
+
+test('long and short totals carry their side in the title, and the Overview labels say the same', () => {
+    const props = dataset.fields.properties;
+    const labels = dataset.views.overview.display.properties;
+    for (const [key, rest] of SIDE_PAIRS) {
+        assert.equal(props.long.properties[key].title, `Long ${rest}`);
+        assert.equal(props.short.properties[key].title, `Short ${rest}`);
+        assert.equal(labels[`long.${key}`].label, props.long.properties[key].title);
+        assert.equal(labels[`short.${key}`].label, props.short.properties[key].title);
+    }
+});
+
+const duplicates = (labels) => labels.filter((l, i) => labels.indexOf(l) !== i);
+
+test('no two columns of a view share a label', () => {
+    for (const [id, view] of Object.entries(dataset.views)) {
+        assert.deepEqual(duplicates(Object.values(view.display.properties).map((p) => p.label)), [], `${id}: duplicate labels`);
+    }
+});
+
+test('control: the duplicate-label check can fail (two columns with one label are reported)', () => {
+    assert.deepEqual(duplicates(['Notional (USD)', 'Mark price', 'Notional (USD)']), ['Notional (USD)']);
+});
+
 test('output schema links only to views that exist', () => {
     for (const [id, prop] of Object.entries(output.properties)) {
         const m = /\?view=([a-z_]+)$/.exec(prop.template);
