@@ -1,0 +1,31 @@
+{
+    "title": "US Economic Calendar",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "types": {
+            "title": "Releases",
+            "type": "array",
+            "description": "Which releases to list: FOMC (Fed rate decision day), CPI (consumer price index), NFP (nonfarm payrolls, the monthly jobs report) and PCE (personal consumption expenditures price index). Leave all four for the full calendar. Every release returned is one result.",
+            "editor": "select",
+            "default": ["FOMC", "CPI", "NFP", "PCE"],
+            "prefill": ["FOMC", "CPI", "NFP", "PCE"],
+            "items": {
+                "type": "string",
+                "enum": ["FOMC", "CPI", "NFP", "PCE"],
+                "enumTitles": ["FOMC rate decision", "CPI consumer prices", "NFP jobs report", "PCE price index"]
+            }
+        },
+        "days": {
+            "title": "Days ahead",
+            "type": "integer",
+            "description": "How many days ahead to list, from 1 to 365. The sources publish about a year of dates, so a longer window holds no more rows. A window with no release of the chosen types returns nothing and is not charged.",
+            "editor": "number",
+            "default": 90,
+            "prefill": 90,
+            "minimum": 1,
+            "maximum": 365,
+            "unit": "days"
+        }
+    }
+}

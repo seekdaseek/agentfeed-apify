@@ -1,0 +1,21 @@
+{
+  "name": "agentfeed-us-macro-calendar",
+  "version": "1.0.0",
+  "description": "Apify actor: the next FOMC, CPI, NFP and PCE release dates from the official Fed, BLS and BEA schedules, via AgentFeed.",
+  "type": "module",
+  "license": "MIT",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test test/map.test.js test/schema.test.js"
+  },
+  "dependencies": {
+    "apify": "^3.7.2"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,178 @@
+{
+    "actorSpecification": 1,
+    "title": "US Economic Calendar: one item per release",
+    "description": "The upcoming FOMC, CPI, NFP and PCE releases with New York and UTC times and the official source of each date.",
+    "fields": {
+        "type": "object",
+        "properties": {
+            "type": {
+                "type": "string",
+                "title": "Release type",
+                "description": "FOMC for a Fed rate decision, CPI for consumer prices, NFP for nonfarm payrolls, PCE for the PCE price index.",
+                "example": "FOMC",
+                "enum": [
+                    "FOMC",
+                    "CPI",
+                    "NFP",
+                    "PCE"
+                ]
+            },
+            "title": {
+                "type": "string",
+                "title": "Release name",
+                "description": "The official name of the release, such as Consumer Price Index.",
+                "example": "Consumer Price Index"
+            },
+            "agency": {
+                "type": "string",
+                "title": "Agency",
+                "description": "Who publishes it: the Federal Reserve, the Bureau of Labor Statistics or the Bureau of Economic Analysis."
+            },
+            "reference_period": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Reference period",
+                "description": "The month the figures cover, such as October 2026. Empty for an FOMC decision."
+            },
+            "date": {
+                "type": "string",
+                "title": "Date (New York)",
+                "description": "The release date in New York, as YYYY-MM-DD.",
+                "example": "2026-10-28"
+            },
+            "time_new_york": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Time (New York)",
+                "description": "The release time in New York, 24-hour clock, as HH:MM.",
+                "example": "14:00"
+            },
+            "utc": {
+                "type": "string",
+                "title": "Time (UTC)",
+                "description": "The release time in UTC (ISO 8601), converted from New York time for that date, so daylight saving is handled.",
+                "example": "2026-10-28T18:00:00.000Z"
+            },
+            "days_until": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "title": "Days until",
+                "description": "Whole days from the moment this actor fetched the data to the release; 0 means within the next 24 hours."
+            },
+            "is_next": {
+                "type": "boolean",
+                "title": "Next of its type",
+                "description": "True for the first upcoming release of this type."
+            },
+            "press_conference": {
+                "type": [
+                    "boolean",
+                    "null"
+                ],
+                "title": "Press conference",
+                "description": "For an FOMC decision, whether the chair holds a press conference. Empty for the other releases."
+            },
+            "source_url": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Official source",
+                "description": "The Federal Reserve, BLS or BEA page the date was read from."
+            },
+            "verified_at": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Verified at",
+                "description": "When the data source last checked this date against the official page (ISO 8601, UTC)."
+            },
+            "source": {
+                "type": "string",
+                "title": "Source",
+                "description": "Where the data comes from."
+            },
+            "fetched_at": {
+                "type": "string",
+                "title": "Fetched at",
+                "description": "When this actor fetched the data (ISO 8601, UTC)."
+            }
+        },
+        "required": [
+            "type",
+            "title",
+            "agency",
+            "date",
+            "utc",
+            "source",
+            "fetched_at"
+        ]
+    },
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "description": "One row per release: type, name, date and time in New York and UTC, days until, and the official source.",
+            "transformation": {
+                "fields": [
+                    "type",
+                    "title",
+                    "date",
+                    "time_new_york",
+                    "utc",
+                    "days_until",
+                    "is_next",
+                    "reference_period",
+                    "source_url"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "type": {
+                        "label": "Release type",
+                        "format": "text"
+                    },
+                    "title": {
+                        "label": "Release name",
+                        "format": "text"
+                    },
+                    "date": {
+                        "label": "Date (New York)",
+                        "format": "text"
+                    },
+                    "time_new_york": {
+                        "label": "Time (New York)",
+                        "format": "text"
+                    },
+                    "utc": {
+                        "label": "Time (UTC)",
+                        "format": "date"
+                    },
+                    "days_until": {
+                        "label": "Days until",
+                        "format": "number"
+                    },
+                    "is_next": {
+                        "label": "Next of its type",
+                        "format": "boolean"
+                    },
+                    "reference_period": {
+                        "label": "Reference period",
+                        "format": "text"
+                    },
+                    "source_url": {
+                        "label": "Official source",
+                        "format": "link"
+                    }
+                }
+            }
+        }
+    }
+}

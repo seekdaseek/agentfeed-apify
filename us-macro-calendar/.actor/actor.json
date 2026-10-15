@@ -1,0 +1,19 @@
+{
+    "actorSpecification": 1,
+    "name": "us-macro-calendar",
+    "title": "US Economic Calendar: FOMC, CPI, NFP and PCE release dates",
+    "description": "The next Fed rate decisions and the CPI, nonfarm payrolls (NFP) and PCE release dates, with New York and UTC times, read from the official Fed, BLS and BEA schedules. One row per release, with its source URL.",
+    "version": "1.0",
+    "buildTag": "latest",
+    "dockerfile": "../Dockerfile",
+    "readme": "../README.md",
+    "input": "./input_schema.json",
+    "output": "./output_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "defaultMemoryMbytes": 256,
+    "environmentVariables": {
+        "AGENTFEED_KEY": "@calendarKey"
+    }
+}

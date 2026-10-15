@@ -1,0 +1,16 @@
+{
+  "type": "FOMC",
+  "title": "FOMC rate decision (statement)",
+  "agency": "Federal Reserve",
+  "reference_period": null,
+  "date": "2026-10-28",
+  "time_new_york": "14:00",
+  "utc": "2026-10-28T18:00:00.000Z",
+  "days_until": 13,
+  "is_next": true,
+  "press_conference": true,
+  "source_url": "https://www.federalreserve.gov/json/calendar.json",
+  "verified_at": "2026-10-15T05:23:01.935Z",
+  "source": "AgentFeed (x402.ochinimus.app), dates read from the Federal Reserve, BLS and BEA pages named in each row",
+  "fetched_at": "2026-10-15T10:04:52.338Z"
+}

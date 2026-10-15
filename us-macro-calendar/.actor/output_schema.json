@@ -1,0 +1,12 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Output of US Economic Calendar",
+    "description": "One dataset item per release.",
+    "properties": {
+        "overview": {
+            "type": "string",
+            "title": "Releases: one row per release",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+        }
+    }
+}
