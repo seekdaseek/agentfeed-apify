@@ -4,6 +4,7 @@ export const EVENT_NAME = 'liquidation-map';
 export const COIN_PATTERN = /^[A-Z0-9]{1,15}$/;
 export const DEFAULT_COINS = ['BTC', 'ETH', 'SOL'];
 export const SOURCE = 'AgentFeed (x402.ochinimus.app), Hyperliquid on-chain positions';
+export const NO_BANDS_NOTE = 'No tracked position has a liquidation price within 50% of the mark, so this coin has no heatmap bands right now. This item was not charged.';
 
 const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
 
@@ -57,5 +58,7 @@ export function mapCoin(coin, body, fetchedAt = new Date().toISOString()) {
         accounts_scanned: num(d.accounts_scanned),
         accounts_with_positions: num(d.accounts_with_positions),
         source: SOURCE,
+        // a coin whose tracked positions all sit far from liquidation has positions but no bands: still returned, never charged (see push.js)
+        ...(bands.length === 0 ? { note: NO_BANDS_NOTE } : {}),
     };
 }

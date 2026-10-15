@@ -308,6 +308,11 @@
                 "type": "string",
                 "title": "Source",
                 "description": "Where the data comes from."
+            },
+            "note": {
+                "type": "string",
+                "title": "Note",
+                "description": "Present only when a coin has positions but no liquidation bands: explains why there is no heatmap and says the item was not charged."
             }
         },
         "required": [

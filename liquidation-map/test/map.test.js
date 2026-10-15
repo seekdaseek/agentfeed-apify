@@ -2,9 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { collect, getAgentFeed } from '../src/agentfeed.js';
-import { COIN_PATTERN, SOURCE, mapCoin } from '../src/map.js';
+import { COIN_PATTERN, NO_BANDS_NOTE, SOURCE, mapCoin } from '../src/map.js';
 
 const live = JSON.parse(fs.readFileSync(new URL('./fixtures/hl-whales-btc.json', import.meta.url), 'utf8'));
+const doge = JSON.parse(fs.readFileSync(new URL('./fixtures/hl-whales-doge-nobands.json', import.meta.url), 'utf8'));
 const quiet = { info() {}, warning() {}, error() {} };
 
 test('mapCoin: a real /api/hl-whales?coin=BTC response becomes the documented item', () => {
@@ -70,4 +71,21 @@ test('end to end with the real client and mapper: BTC ok, NOPE 400, ETH 500 => e
     assert.deepEqual(calls, ['BTC', 'NOPE', 'ETH']);
     assert.deepEqual(pushed, ['BTC']);
     assert.equal(stats.failed, 2);
+});
+
+// Measured live 15 Oct 2026: the tracked accounts hold DOGE, SUI and BNB far from liquidation (or well collateralised), so the route
+// returns positions but `liquidation_clusters: []`. The item is still returned, with a note, and is never charged (push.js).
+test('mapCoin: a real coin with positions but no bands (DOGE) is an item that carries the agreed note', () => {
+    assert.equal(doge.data.liquidation_clusters.length, 0);
+    assert.ok(doge.data.top_positions.length > 0);
+    const item = mapCoin('DOGE', doge, '2026-10-15T06:30:00.000Z');
+    assert.ok(item);
+    assert.deepEqual(item.liquidation_bands, []);
+    assert.equal(item.largest_positions.length, doge.data.top_positions.length);
+    assert.equal(item.note, 'No tracked position has a liquidation price within 50% of the mark, so this coin has no heatmap bands right now. This item was not charged.');
+    assert.equal(NO_BANDS_NOTE, item.note);
+});
+
+test('mapCoin: a normal item has no note key at all, so its output is exactly what it was', () => {
+    assert.equal(Object.hasOwn(mapCoin('BTC', live), 'note'), false);
 });

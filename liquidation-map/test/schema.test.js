@@ -9,6 +9,7 @@ const dataset = read('../.actor/dataset_schema.json');
 const output = read('../.actor/output_schema.json');
 const actor = read('../.actor/actor.json');
 const live = read('./fixtures/hl-whales-btc.json');
+const doge = read('./fixtures/hl-whales-doge-nobands.json');
 
 // Apify validates every push against `fields` with AJV (JSON Schema draft-07) and discards the whole request on a mismatch,
 // so the schema must accept every item the mapper can produce. strict:false because `example` is an Apify extension keyword.
@@ -76,14 +77,20 @@ test('control: an item missing a required field fails the schema (the check can 
     assert.equal(validate(item), false);
 });
 
-test('every key the mapper emits is described in the schema (drift guard)', () => {
+test('every key the mapper emits is described in the schema (drift guard); `note` is the one optional field, present only without bands', () => {
     const item = mapCoin('BTC', live);
     const props = dataset.fields.properties;
-    assert.deepEqual(Object.keys(item).sort(), Object.keys(props).sort());
+    assert.deepEqual(Object.keys(item).sort(), Object.keys(props).filter((k) => k !== 'note').sort());
+    assert.deepEqual(Object.keys(mapCoin('DOGE', doge)).sort(), Object.keys(props).sort());
+    assert.ok(!dataset.fields.required.includes('note'));
     assert.deepEqual(Object.keys(item.long).sort(), Object.keys(props.long.properties).sort());
     assert.deepEqual(Object.keys(item.short).sort(), Object.keys(props.short.properties).sort());
     assert.deepEqual(Object.keys(item.liquidation_bands[0]).sort(), Object.keys(props.liquidation_bands.items.properties).sort());
     assert.deepEqual(Object.keys(item.largest_positions[0]).sort(), Object.keys(props.largest_positions.items.properties).sort());
+});
+
+test('an item without bands (real DOGE response, with its note) validates against the schema', () => {
+    check(mapCoin('DOGE', doge, '2026-10-15T06:30:00.000Z'));
 });
 
 // What Apify does with a view (measured live on a real run, 14 Oct 2026): `fields` is applied first, then `unwind` merges each array

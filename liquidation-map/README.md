@@ -12,6 +12,8 @@ Most liquidation maps guess: they assume a leverage mix and draw where positions
 - **Mark price, net USD, `as_of` (when the positions were read) and `fetched_at`.**
 - A `source` line on every item.
 
+Coins whose tracked positions sit far from liquidation can return few or no bands; a coin with no bands is not charged.
+
 ## Use cases
 
 - See at which prices the largest Hyperliquid accounts would be liquidated, coin by coin, from their real liquidation prices.
