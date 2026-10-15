@@ -1,0 +1,21 @@
+{
+  "name": "agentfeed-email-list-cleaner",
+  "version": "1.0.0",
+  "description": "Apify actor: fix, dedupe and check the email addresses a scraper left behind (syntax, junk, MX, disposable, role, typos). No SMTP probe.",
+  "type": "module",
+  "license": "MIT",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test test/core.test.js test/clean.test.js test/dns.test.js test/plan.test.js test/schema.test.js"
+  },
+  "dependencies": {
+    "apify": "^3.7.2"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

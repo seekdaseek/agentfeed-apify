@@ -1,0 +1,16 @@
+{
+    "actorSpecification": 1,
+    "name": "email-list-cleaner",
+    "title": "Email Cleaner: fix, dedupe and check scraped emails (no SMTP)",
+    "description": "Clean the email list a scraper left behind: fixes mailto: and encoding leftovers, drops junk like logo@2x.png and tracking IDs, removes duplicates, and checks the domain (MX, disposable, role, typos). Never claims a mailbox exists.",
+    "version": "1.0",
+    "buildTag": "latest",
+    "dockerfile": "../Dockerfile",
+    "readme": "../README.md",
+    "input": "./input_schema.json",
+    "output": "./output_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "defaultMemoryMbytes": 256
+}

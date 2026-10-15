@@ -44,10 +44,11 @@ export function viewColumns(view, props) {
  * actorDir: URL of the actor folder (new URL('..', import.meta.url) from its test/ folder).
  * Ajv: the actor's own ajv import. items: real mapped items (all must validate). nullItem: an item the mapper produced from
  * junk fields. expectedViews: view ids the output schema must link. minProperties: size of the property tree.
+ * usesAgentFeedKey: false for an actor whose logic runs inside it (no AgentFeed route, so no secret key in actor.json).
  * uniqueTitles: no two properties at any depth share a title and no two columns of a view share a label (the Console shows the
  * title, so a repeated one cannot be told apart; actor A had "Notional (USD)" for both the long and the short side).
  */
-export function schemaChecks({ actorDir, Ajv, items, nullItem, expectedViews = ['overview'], minProperties = 8, uniqueTitles = false }) {
+export function schemaChecks({ actorDir, Ajv, items, nullItem, expectedViews = ['overview'], minProperties = 8, uniqueTitles = false, usesAgentFeedKey = true }) {
     const dataset = readJson(actorDir, '.actor/dataset_schema.json');
     const output = readJson(actorDir, '.actor/output_schema.json');
     const actor = readJson(actorDir, '.actor/actor.json');
@@ -60,7 +61,8 @@ export function schemaChecks({ actorDir, Ajv, items, nullItem, expectedViews = [
         assert.equal(actor.output, './output_schema.json');
         assert.equal(actor.input, './input_schema.json');
         assert.equal(actor.defaultMemoryMbytes, 256);
-        assert.match(actor.environmentVariables.AGENTFEED_KEY, /^@[a-zA-Z]+Key$/);
+        if (usesAgentFeedKey) assert.match(actor.environmentVariables.AGENTFEED_KEY, /^@[a-zA-Z]+Key$/);
+        else assert.equal(actor.environmentVariables, undefined, 'an actor with no AgentFeed route carries no key');
         assert.ok(!('$schema' in dataset.fields) || dataset.fields.$schema === 'http://json-schema.org/draft-07/schema#');
     });
 

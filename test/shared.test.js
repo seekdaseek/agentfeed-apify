@@ -10,7 +10,8 @@ const reply = (status, body, headers = {}) => new Response(typeof body === 'stri
 
 test('every copy of a shared file is byte-identical to shared/, and every actor has agentfeed.js', () => {
     const root = new URL('../', import.meta.url);
-    const actors = fs.readdirSync(root, { withFileTypes: true }).filter((e) => e.isDirectory() && fs.existsSync(new URL(`${e.name}/.actor/actor.json`, root))).map((e) => e.name);
+    // an actor whose logic runs inside it (no AgentFeed route) has no AGENTFEED_KEY and no client copy to keep in step
+    const actors = fs.readdirSync(root, { withFileTypes: true }).filter((e) => e.isDirectory() && fs.existsSync(new URL(`${e.name}/.actor/actor.json`, root)) && JSON.parse(fs.readFileSync(new URL(`${e.name}/.actor/actor.json`, root), 'utf8')).environmentVariables?.AGENTFEED_KEY).map((e) => e.name);
     assert.ok(actors.length > 0, 'found no actor folders');
     const copied = fs.readdirSync(new URL('shared/', root)).filter((f) => ['agentfeed.js', 'multi.js'].includes(f));
     assert.deepEqual(copied.sort(), ['agentfeed.js', 'multi.js']);

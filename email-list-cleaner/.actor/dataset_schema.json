@@ -1,0 +1,199 @@
+{
+    "actorSpecification": 1,
+    "title": "Email Cleaner: one item per address",
+    "description": "The cleaned address with a status, the reasons, and the checks behind it.",
+    "fields": {
+        "type": "object",
+        "properties": {
+            "input": {
+                "type": "string",
+                "title": "Input",
+                "description": "The line exactly as it came in."
+            },
+            "email": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Email",
+                "description": "The cleaned address: surrounding junk removed and the domain in lower case. Empty when the line holds no @.",
+                "example": "jane.doe@gmail.com"
+            },
+            "status": {
+                "type": "string",
+                "title": "Status",
+                "description": "valid: the domain takes mail and nothing about the address looks wrong. risky: it takes mail but the address is disposable, a role account, a likely typo or reachable only through an A record. invalid: bad syntax, junk, no such domain, a null MX or no mail host. unknown: the DNS lookup did not finish (never charged). Never says the mailbox exists.",
+                "enum": [
+                    "valid",
+                    "invalid",
+                    "risky",
+                    "unknown"
+                ]
+            },
+            "reasons": {
+                "type": "array",
+                "title": "Reasons",
+                "description": "Why the status is what it is, for example disposable, role_account, did_you_mean, a_record_fallback, domain_not_found, null_mx, invalid_syntax, junk_file_name, dns_timeout. Empty for a clean valid address.",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "fixed_from": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Fixed from",
+                "description": "The raw line, when cleaning changed it (for example mailto:Info@Gmail.COM). Empty when the line was already clean."
+            },
+            "junk": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Junk type",
+                "description": "file_name for asset names read as addresses (logo@2x.png), tracking_id for machine ids (abc123@sentry.io), placeholder for fill-in addresses (name@example.com). Empty for a real-looking address.",
+                "enum": [
+                    "file_name",
+                    "tracking_id",
+                    "placeholder",
+                    null
+                ]
+            },
+            "domain": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Domain",
+                "description": "The domain part of the address, lower case, in ASCII form for an international domain."
+            },
+            "accepts_mail": {
+                "type": [
+                    "boolean",
+                    "null"
+                ],
+                "title": "Accepts mail",
+                "description": "True when the domain has a mail server (or an address record to fall back on), false when it has none, empty when it was not looked up or the lookup did not finish."
+            },
+            "mx_null": {
+                "type": "boolean",
+                "title": "Null MX",
+                "description": "True when the domain publishes a null MX (RFC 7505), which says it accepts no mail at all."
+            },
+            "mx_provider": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Mail provider",
+                "description": "Who runs the mail of the domain, read from its MX names: google, microsoft, zoho, proofpoint, mimecast, yahoo, icloud, proton, and more. other when the MX is not one we know, none when the domain has no MX, empty when it was not looked up."
+            },
+            "disposable": {
+                "type": "boolean",
+                "title": "Disposable domain",
+                "description": "True when the domain, or a parent of it, is on the public list of disposable and throwaway mail services."
+            },
+            "role": {
+                "type": "boolean",
+                "title": "Role account",
+                "description": "True for shared mailboxes such as info@, sales@, support@, admin@ or noreply@."
+            },
+            "free_provider": {
+                "type": "boolean",
+                "title": "Free provider",
+                "description": "True for a free mailbox provider such as Gmail, Outlook or Yahoo."
+            },
+            "did_you_mean": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Did you mean",
+                "description": "A corrected address when the domain looks like a typo of a popular one (gmial.com for gmail.com) or has a mistyped ending (.con for .com)."
+            },
+            "duplicate_of": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Duplicate of",
+                "description": "With Remove duplicates off: the first input line that held the same address. Empty otherwise."
+            }
+        },
+        "required": [
+            "input",
+            "status",
+            "reasons",
+            "mx_null",
+            "disposable",
+            "role",
+            "free_provider"
+        ]
+    },
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "description": "One row per address: the line as it came in, the cleaned address, its status and reasons, and the domain checks.",
+            "transformation": {
+                "fields": [
+                    "input",
+                    "email",
+                    "status",
+                    "reasons",
+                    "fixed_from",
+                    "junk",
+                    "domain",
+                    "accepts_mail",
+                    "mx_provider",
+                    "did_you_mean"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "input": {
+                        "label": "Input",
+                        "format": "text"
+                    },
+                    "email": {
+                        "label": "Email",
+                        "format": "text"
+                    },
+                    "status": {
+                        "label": "Status",
+                        "format": "text"
+                    },
+                    "reasons": {
+                        "label": "Reasons",
+                        "format": "array"
+                    },
+                    "fixed_from": {
+                        "label": "Fixed from",
+                        "format": "text"
+                    },
+                    "junk": {
+                        "label": "Junk type",
+                        "format": "text"
+                    },
+                    "domain": {
+                        "label": "Domain",
+                        "format": "text"
+                    },
+                    "accepts_mail": {
+                        "label": "Accepts mail",
+                        "format": "boolean"
+                    },
+                    "mx_provider": {
+                        "label": "Mail provider",
+                        "format": "text"
+                    },
+                    "did_you_mean": {
+                        "label": "Did you mean",
+                        "format": "text"
+                    }
+                }
+            }
+        }
+    }
+}

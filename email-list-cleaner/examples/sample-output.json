@@ -1,0 +1,167 @@
+[{
+  "input": "Jane.Doe@Gmail.COM",
+  "email": "Jane.Doe@gmail.com",
+  "status": "valid",
+  "reasons": [],
+  "fixed_from": "Jane.Doe@Gmail.COM",
+  "junk": null,
+  "domain": "gmail.com",
+  "accepts_mail": true,
+  "mx_null": false,
+  "mx_provider": "google",
+  "disposable": false,
+  "role": false,
+  "free_provider": true,
+  "did_you_mean": null,
+  "duplicate_of": null
+},
+{
+  "input": "mailto:info@apify.com",
+  "email": "info@apify.com",
+  "status": "risky",
+  "reasons": [
+    "role_account"
+  ],
+  "fixed_from": "mailto:info@apify.com",
+  "junk": null,
+  "domain": "apify.com",
+  "accepts_mail": true,
+  "mx_null": false,
+  "mx_provider": "google",
+  "disposable": false,
+  "role": true,
+  "free_provider": false,
+  "did_you_mean": null,
+  "duplicate_of": null
+},
+{
+  "input": "john@gmai.com",
+  "email": "john@gmai.com",
+  "status": "risky",
+  "reasons": [
+    "did_you_mean"
+  ],
+  "fixed_from": null,
+  "junk": null,
+  "domain": "gmai.com",
+  "accepts_mail": true,
+  "mx_null": false,
+  "mx_provider": "other",
+  "disposable": false,
+  "role": false,
+  "free_provider": false,
+  "did_you_mean": "john@gmail.com",
+  "duplicate_of": null
+},
+{
+  "input": "logo@2x.png",
+  "email": "logo@2x.png",
+  "status": "invalid",
+  "reasons": [
+    "junk_file_name"
+  ],
+  "fixed_from": null,
+  "junk": "file_name",
+  "domain": "2x.png",
+  "accepts_mail": null,
+  "mx_null": false,
+  "mx_provider": null,
+  "disposable": false,
+  "role": false,
+  "free_provider": false,
+  "did_you_mean": null,
+  "duplicate_of": null
+},
+{
+  "input": "5f3a9c1e7b2d4a6f8c0e1d3b5a7c9e2f@sentry.wixpress.com",
+  "email": "5f3a9c1e7b2d4a6f8c0e1d3b5a7c9e2f@sentry.wixpress.com",
+  "status": "invalid",
+  "reasons": [
+    "junk_tracking_id"
+  ],
+  "fixed_from": null,
+  "junk": "tracking_id",
+  "domain": "sentry.wixpress.com",
+  "accepts_mail": null,
+  "mx_null": false,
+  "mx_provider": null,
+  "disposable": false,
+  "role": false,
+  "free_provider": false,
+  "did_you_mean": null,
+  "duplicate_of": null
+},
+{
+  "input": "name@example.com",
+  "email": "name@example.com",
+  "status": "invalid",
+  "reasons": [
+    "junk_placeholder"
+  ],
+  "fixed_from": null,
+  "junk": "placeholder",
+  "domain": "example.com",
+  "accepts_mail": null,
+  "mx_null": false,
+  "mx_provider": null,
+  "disposable": false,
+  "role": false,
+  "free_provider": false,
+  "did_you_mean": null,
+  "duplicate_of": null
+},
+{
+  "input": "temp@mailinator.com",
+  "email": "temp@mailinator.com",
+  "status": "risky",
+  "reasons": [
+    "disposable"
+  ],
+  "fixed_from": null,
+  "junk": null,
+  "domain": "mailinator.com",
+  "accepts_mail": true,
+  "mx_null": false,
+  "mx_provider": "other",
+  "disposable": true,
+  "role": false,
+  "free_provider": false,
+  "did_you_mean": null,
+  "duplicate_of": null
+},
+{
+  "input": "ceo@apify.com",
+  "email": "ceo@apify.com",
+  "status": "valid",
+  "reasons": [],
+  "fixed_from": null,
+  "junk": null,
+  "domain": "apify.com",
+  "accepts_mail": true,
+  "mx_null": false,
+  "mx_provider": "google",
+  "disposable": false,
+  "role": false,
+  "free_provider": false,
+  "did_you_mean": null,
+  "duplicate_of": null
+},
+{
+  "input": "someone@this-domain-does-not-exist-af.com",
+  "email": "someone@this-domain-does-not-exist-af.com",
+  "status": "invalid",
+  "reasons": [
+    "domain_not_found"
+  ],
+  "fixed_from": null,
+  "junk": null,
+  "domain": "this-domain-does-not-exist-af.com",
+  "accepts_mail": false,
+  "mx_null": false,
+  "mx_provider": "none",
+  "disposable": false,
+  "role": false,
+  "free_provider": false,
+  "did_you_mean": null,
+  "duplicate_of": null
+}]

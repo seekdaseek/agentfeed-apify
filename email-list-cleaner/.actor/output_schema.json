@@ -1,0 +1,12 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Output of Email Cleaner",
+    "description": "One dataset item per address.",
+    "properties": {
+        "overview": {
+            "type": "string",
+            "title": "Addresses: one row per address",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+        }
+    }
+}

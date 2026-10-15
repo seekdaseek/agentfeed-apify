@@ -1,0 +1,49 @@
+{
+    "title": "Email Cleaner",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "emails": {
+            "title": "Email addresses",
+            "type": "array",
+            "description": "The addresses to clean, one per line, exactly as the scraper gave them (up to 200,000). Leftovers such as mailto:, %20, u003e, quotes and angle brackets are removed first. Every unique address that gets a verdict is one result; a repeat, a value that is not an address, and a lookup that could not finish are free.",
+            "editor": "stringList",
+            "prefill": [
+                "Jane.Doe@Gmail.COM",
+                "mailto:info@apify.com",
+                "john@gmai.com",
+                "logo@2x.png",
+                "5f3a9c1e7b2d4a6f8c0e1d3b5a7c9e2f@sentry.wixpress.com",
+                "name@example.com",
+                "temp@mailinator.com",
+                "ceo@apify.com",
+                "someone@this-domain-does-not-exist-af.com",
+                "jane.doe@gmail.com"
+            ]
+        },
+        "datasetId": {
+            "title": "Dataset from another Actor",
+            "type": "string",
+            "description": "Optional. A dataset with an email field, for example the output of a contact or Google Maps email scraper, to clean it in the same run (pick it, or pass its id through the API). The run gets read access to this one dataset only. Leave empty to use only the list above.",
+            "editor": "resourcePicker",
+            "resourceType": "dataset",
+            "resourcePermissions": [
+                "READ"
+            ]
+        },
+        "field": {
+            "title": "Email field in the dataset",
+            "type": "string",
+            "description": "The field that holds the address in each dataset item. A dotted path such as contact.email works, and a field that holds a list of addresses is read one by one.",
+            "editor": "textfield",
+            "default": "email",
+            "prefill": "email"
+        },
+        "dedupe": {
+            "title": "Remove duplicates",
+            "type": "boolean",
+            "description": "On (the default): an address that appears again is dropped from the output and never charged twice. Off: every input line is returned, a repeat copies the first verdict and names it in Duplicate of, and is still never charged.",
+            "default": true
+        }
+    }
+}
