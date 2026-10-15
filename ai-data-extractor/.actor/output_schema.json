@@ -1,0 +1,12 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Output of AI Data Extractor",
+    "description": "One dataset item per page or PDF.",
+    "properties": {
+        "overview": {
+            "type": "string",
+            "title": "Pages: one row per URL",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+        }
+    }
+}

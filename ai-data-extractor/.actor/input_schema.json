@@ -1,0 +1,40 @@
+{
+    "title": "AI Data Extractor",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "urls": {
+            "title": "Page or PDF URLs",
+            "type": "array",
+            "description": "Links to the web pages or PDFs to read, one per line (up to 50). Each must be a public http or https URL (ports 80 and 443) that serves a web page or a PDF of at most 10 MB, on a site whose robots.txt allows automated fetching. Every page that yields at least one of your fields is one result. A link that cannot be fetched, or a page that states none of your fields, returns nothing and is not charged.",
+            "editor": "stringList",
+            "default": [
+                "https://en.wikipedia.org/wiki/Solana_(blockchain_platform)"
+            ],
+            "prefill": [
+                "https://en.wikipedia.org/wiki/Solana_(blockchain_platform)"
+            ],
+            "maxItems": 50
+        },
+        "schema": {
+            "title": "Fields to extract",
+            "type": "object",
+            "description": "A JSON object that names each field you want and its type: string, number, boolean, date or string[] (a list of text). 1 to 20 fields, the same for every URL. A value the page does not state comes back as null, never as a guess.",
+            "editor": "json",
+            "default": {
+                "name": "string",
+                "original_author": "string",
+                "initial_release_year": "number",
+                "consensus_mechanism": "string",
+                "native_token": "string"
+            },
+            "prefill": {
+                "name": "string",
+                "original_author": "string",
+                "initial_release_year": "number",
+                "consensus_mechanism": "string",
+                "native_token": "string"
+            }
+        }
+    }
+}

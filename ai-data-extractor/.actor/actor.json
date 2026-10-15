@@ -1,0 +1,19 @@
+{
+    "actorSpecification": 1,
+    "name": "ai-data-extractor",
+    "title": "AI Data Extractor: web page or PDF to JSON by your schema",
+    "description": "Give a URL and the fields you want, get structured JSON from any web page or PDF with AI. A field the page does not state comes back null, never invented. Up to 20 fields: text, number, true/false, date or list.",
+    "version": "1.0",
+    "buildTag": "latest",
+    "dockerfile": "../Dockerfile",
+    "readme": "../README.md",
+    "input": "./input_schema.json",
+    "output": "./output_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "defaultMemoryMbytes": 256,
+    "environmentVariables": {
+        "AGENTFEED_KEY": "@extractKey"
+    }
+}

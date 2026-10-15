@@ -1,0 +1,153 @@
+{
+    "actorSpecification": 1,
+    "title": "AI Data Extractor: one item per page or PDF",
+    "description": "The fields you asked for, extracted from each page or PDF, with the fields that were not stated.",
+    "fields": {
+        "type": "object",
+        "properties": {
+            "url": {
+                "type": "string",
+                "title": "URL",
+                "description": "The page or PDF link you supplied.",
+                "example": "https://en.wikipedia.org/wiki/Solana_(blockchain_platform)"
+            },
+            "final_url": {
+                "type": "string",
+                "title": "Final URL",
+                "description": "Where the page was actually fetched from after redirects."
+            },
+            "kind": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Document type",
+                "description": "html for a web page, pdf for a PDF file."
+            },
+            "page_title": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Page title",
+                "description": "The title of the web page. Empty for a PDF."
+            },
+            "data": {
+                "type": "object",
+                "title": "Extracted data",
+                "description": "One entry for each field in your schema, in the order you gave them: the value the page states, or null when it does not state it."
+            },
+            "fields_requested": {
+                "type": "number",
+                "title": "Fields requested",
+                "description": "How many fields your schema asked for."
+            },
+            "fields_found": {
+                "type": "number",
+                "title": "Fields found",
+                "description": "How many of those fields have a value on this page. At least 1, because a page that states none of your fields is not returned."
+            },
+            "null_fields": {
+                "type": "array",
+                "title": "Fields not stated",
+                "description": "The names of the fields the page does not state; their value in the extracted data is null.",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "verbatim_fields": {
+                "type": "array",
+                "title": "Fields quoted verbatim",
+                "description": "The names of the fields whose value was found word for word in the page text.",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "truncated": {
+                "type": "boolean",
+                "title": "Truncated",
+                "description": "True when the document was longer than the reader takes in and only the first part was read. False means all of it was read."
+            },
+            "pct_read": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "title": "Share read (%)",
+                "description": "The percentage of the document that was read, from 0 to 100."
+            },
+            "source": {
+                "type": "string",
+                "title": "Source",
+                "description": "Where the data comes from."
+            },
+            "fetched_at": {
+                "type": "string",
+                "title": "Fetched at",
+                "description": "When this actor fetched the data (ISO 8601, UTC)."
+            }
+        },
+        "required": [
+            "url",
+            "final_url",
+            "data",
+            "source",
+            "fetched_at"
+        ]
+    },
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "description": "One row per URL: the extracted data, how many fields were found, and which were not stated.",
+            "transformation": {
+                "fields": [
+                    "url",
+                    "kind",
+                    "data",
+                    "fields_found",
+                    "fields_requested",
+                    "null_fields",
+                    "truncated",
+                    "fetched_at"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "url": {
+                        "label": "URL",
+                        "format": "link"
+                    },
+                    "kind": {
+                        "label": "Document type",
+                        "format": "text"
+                    },
+                    "data": {
+                        "label": "Extracted data",
+                        "format": "object"
+                    },
+                    "fields_found": {
+                        "label": "Fields found",
+                        "format": "number"
+                    },
+                    "fields_requested": {
+                        "label": "Fields requested",
+                        "format": "number"
+                    },
+                    "null_fields": {
+                        "label": "Fields not stated",
+                        "format": "array"
+                    },
+                    "truncated": {
+                        "label": "Truncated",
+                        "format": "boolean"
+                    },
+                    "fetched_at": {
+                        "label": "Fetched at",
+                        "format": "date"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+  "url": "https://en.wikipedia.org/wiki/Solana_(blockchain_platform)",
+  "final_url": "https://en.wikipedia.org/wiki/Solana_(blockchain_platform)",
+  "kind": "html",
+  "page_title": "Solana (blockchain platform)",
+  "data": {
+    "name": "Solana",
+    "original_author": "Anatoly Yakovenko, Raj Gokal",
+    "initial_release_year": 2020,
+    "consensus_mechanism": "proof-of-stake",
+    "native_token": "SOL"
+  },
+  "fields_requested": 5,
+  "fields_found": 5,
+  "null_fields": [],
+  "verbatim_fields": [
+    "name",
+    "original_author",
+    "consensus_mechanism",
+    "native_token"
+  ],
+  "truncated": false,
+  "pct_read": 100,
+  "source": "AgentFeed (x402.ochinimus.app), page or PDF fetched once from the URL you supplied",
+  "fetched_at": "2026-10-15T09:58:50.000Z"
+}

@@ -44,8 +44,10 @@ export function viewColumns(view, props) {
  * actorDir: URL of the actor folder (new URL('..', import.meta.url) from its test/ folder).
  * Ajv: the actor's own ajv import. items: real mapped items (all must validate). nullItem: an item the mapper produced from
  * junk fields. expectedViews: view ids the output schema must link. minProperties: size of the property tree.
+ * uniqueTitles: no two properties at any depth share a title and no two columns of a view share a label (the Console shows the
+ * title, so a repeated one cannot be told apart; actor A had "Notional (USD)" for both the long and the short side).
  */
-export function schemaChecks({ actorDir, Ajv, items, nullItem, expectedViews = ['overview'], minProperties = 8 }) {
+export function schemaChecks({ actorDir, Ajv, items, nullItem, expectedViews = ['overview'], minProperties = 8, uniqueTitles = false }) {
     const dataset = readJson(actorDir, '.actor/dataset_schema.json');
     const output = readJson(actorDir, '.actor/output_schema.json');
     const actor = readJson(actorDir, '.actor/actor.json');
@@ -90,6 +92,17 @@ export function schemaChecks({ actorDir, Ajv, items, nullItem, expectedViews = [
         const broken = { properties: { a: { title: 'A', description: 'x', properties: { b: { title: 'B' } } } } };
         assert.deepEqual(propertyNodes(broken).filter(([, n]) => typeof n.description !== 'string').map(([name]) => name), ['a.b']);
     });
+
+    if (uniqueTitles) {
+        const duplicates = (list) => list.filter((x, i) => list.indexOf(x) !== i);
+        test('no two properties, at any depth, share a title, and no two columns of a view share a label', () => {
+            assert.deepEqual(duplicates(propertyNodes(dataset.fields).map(([, n]) => n.title)), []);
+            for (const [id, view] of Object.entries(dataset.views)) assert.deepEqual(duplicates(Object.values(view.display.properties).map((p) => p.label)), [], `${id}: duplicate labels`);
+        });
+        test('control: the duplicate-title check can fail (a repeated title is reported)', () => {
+            assert.deepEqual(duplicates(propertyNodes({ properties: { a: { title: 'Notional' }, b: { title: 'Notional' } } }).map(([, n]) => n.title)), ['Notional']);
+        });
+    }
 
     test('the input schema has a title and a description on every property, and every list input has a non-empty prefill', () => {
         for (const [name, p] of Object.entries(input.properties)) {
