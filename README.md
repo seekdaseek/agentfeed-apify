@@ -4,7 +4,7 @@
 
 ## On the Apify Store
 
-Four public actors, billed in fiat through Apify, so no wallet is needed. Prices are per result, plus Apify's $0.00005 start fee per run.
+Five public actors, billed in fiat through Apify, so no wallet is needed. Prices are per result, plus Apify's $0.00005 start fee per run.
 
 | Folder | Store URL | Price | What it returns |
 |---|---|---|---|
@@ -12,6 +12,7 @@ Four public actors, billed in fiat through Apify, so no wallet is needed. Prices
 | [`scholarly-paper-search/`](scholarly-paper-search) | [apify.com/ochinimus/scholarly-paper-search](https://apify.com/ochinimus/scholarly-paper-search) | $0.003 per paper | Papers from OpenAlex's CC0 data, by search or DOI |
 | [`us-company-filings/`](us-company-filings) | [apify.com/ochinimus/us-company-filings](https://apify.com/ochinimus/us-company-filings) | $0.002 per filing | Recent public filings from the SEC's EDGAR system, per ticker |
 | [`pdf-to-markdown/`](pdf-to-markdown) | [apify.com/ochinimus/pdf-to-markdown](https://apify.com/ochinimus/pdf-to-markdown) | $0.01 per PDF | The text of a PDF as markdown, page by page |
+| [`ai-data-extractor/`](ai-data-extractor) | [apify.com/ochinimus/ai-data-extractor](https://apify.com/ochinimus/ai-data-extractor) | $0.02 per page | Structured JSON from a web page or PDF, for the fields you name |
 
 ## The AgentFeed routes behind them
 
@@ -21,6 +22,7 @@ Four public actors, billed in fiat through Apify, so no wallet is needed. Prices
 | Scholarly Paper Search: OpenAlex, Google Scholar alternative | [`scholarly-paper-search/`](scholarly-paper-search) | Papers from OpenAlex (CC0 data) by search or DOI: title, year, authors, venue, citations, open-access link | `/api/papers`, `/api/paper/{doi}` |
 | US Company Filings by Ticker: 10-K, 10-Q, 8-K, Form 4 | [`us-company-filings/`](us-company-filings) | Recent public filings from the SEC's EDGAR system per ticker, with dates, accession numbers, 8-K items and links | `/api/sec-filings` |
 | PDF to Markdown: clean text from any PDF URL | [`pdf-to-markdown/`](pdf-to-markdown) | Page-by-page markdown text of text-layer PDFs | `/api/pdf-markdown` |
+| AI Data Extractor: web page or PDF to JSON by your schema | [`ai-data-extractor/`](ai-data-extractor) | One JSON object per page or PDF for a schema of up to 20 typed fields; a field the page does not state is null | `/api/extract` |
 
 Each folder is a complete actor: its `README.md` is the Apify Store listing. Each actor calls AgentFeed with its own key, stored only as an Apify secret.
 
