@@ -52,7 +52,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "Accounts",
+                        "title": "Long accounts",
                         "description": "How many tracked accounts hold a position on this side."
                     },
                     "notional_usd": {
@@ -68,7 +68,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "Average entry price",
+                        "title": "Long average entry price",
                         "description": "Size-weighted entry price."
                     },
                     "avg_liq_distance_pct": {
@@ -76,7 +76,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "Average distance to liquidation (%)",
+                        "title": "Long average distance to liquidation (%)",
                         "description": "Notional-weighted distance between the mark price and the liquidation price."
                     },
                     "within_10pct_of_liq_usd": {
@@ -92,7 +92,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "Unrealized PnL (USD)",
+                        "title": "Long unrealized PnL (USD)",
                         "description": "Sum of the unrealized profit or loss in USD of the long positions."
                     }
                 },
@@ -110,7 +110,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "Accounts",
+                        "title": "Short accounts",
                         "description": "How many tracked accounts hold a position on this side."
                     },
                     "notional_usd": {
@@ -126,7 +126,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "Average entry price",
+                        "title": "Short average entry price",
                         "description": "Size-weighted entry price."
                     },
                     "avg_liq_distance_pct": {
@@ -134,7 +134,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "Average distance to liquidation (%)",
+                        "title": "Short average distance to liquidation (%)",
                         "description": "Notional-weighted distance between the mark price and the liquidation price."
                     },
                     "within_10pct_of_liq_usd": {
@@ -150,7 +150,7 @@
                             "number",
                             "null"
                         ],
-                        "title": "Unrealized PnL (USD)",
+                        "title": "Short unrealized PnL (USD)",
                         "description": "Sum of the unrealized profit or loss in USD of the short positions."
                     }
                 },

@@ -158,6 +158,18 @@ test('long and short totals carry their side in the title, and the Overview labe
     }
 });
 
+test('every field under long and short starts with its side, and no title is shared between the two sides', () => {
+    const { long, short } = dataset.fields.properties;
+    assert.deepEqual(Object.keys(long.properties), Object.keys(short.properties));
+    for (const [key, node] of Object.entries(long.properties)) {
+        assert.match(node.title, /^Long /, `long.${key}`);
+        assert.match(short.properties[key].title, /^Short /, `short.${key}`);
+        assert.equal(short.properties[key].title, node.title.replace(/^Long /, 'Short '), `${key}: the two titles differ only in the side`);
+    }
+    const all = [...Object.values(long.properties), ...Object.values(short.properties)].map((p) => p.title);
+    assert.equal(new Set(all).size, all.length, 'a title is used twice');
+});
+
 const duplicates = (labels) => labels.filter((l, i) => labels.indexOf(l) !== i);
 
 test('no two columns of a view share a label', () => {
