@@ -31,6 +31,13 @@ export function valuesAt(item, path) {
     return out;
 }
 
+/** Does the item have the field at this dotted path at all (its value may be null, empty or a list)? */
+export function hasPath(item, path) {
+    let v = item;
+    for (const key of path.split('.')) { if (v === null || typeof v !== 'object' || !(key in v)) return false; v = v[key]; }
+    return true;
+}
+
 /**
  * With neither emails nor a dataset it runs the sample list, so the default run always returns data. What the caller gave is
  * never replaced by the sample: a dataset id that is malformed or a field name that is not text is an `error` (the run fails

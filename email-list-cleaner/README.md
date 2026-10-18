@@ -74,6 +74,15 @@ curl -X POST "https://api.apify.com/v2/acts/ochinimus~email-list-cleaner/run-syn
   -d '{"datasetId": "SCRAPER_RUN_DEFAULT_DATASET_ID", "field": "email"}'
 ```
 
+## Run it automatically after a scraper (Actor-to-Actor integration)
+
+Open the scraper's page in the Console, go to **Integrations**, click **Add integration** and search for **Email Cleaner**. Then set:
+
+- **Start when:** `run succeeded`.
+- **Actor input:** `datasetId` = `{{resource.defaultDatasetId}}` (the dataset of the run that just finished) and `field` = the name of the email field in that scraper's output, for example `emails` for the Contact Details Scraper (`emails` holds a list; each address is read one by one). `field` defaults to `email`.
+
+Every time the scraper finishes, the cleaner starts on its dataset and writes its own dataset of cleaned rows. The run gets read access to that one dataset only. If the scraper found no address (the field is there but empty), the cleaner finishes with nothing to check and nothing charged; if the field name does not exist in the items, the run stops with a message naming the fields it found.
+
 ## Sample output
 
 Real results for three lines of the default sample, from a run on the Apify platform on 15 Oct 2026:

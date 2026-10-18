@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { Actor, log } from 'apify';
 import { createCleaner, newReturned, tallyReturned } from './clean.js';
 import { createResolver } from './dns.js';
-import { BATCH_SIZE, EVENT_NAME, MAX_LINES, planInput, valuesAt } from './plan.js';
+import { BATCH_SIZE, EVENT_NAME, MAX_LINES, hasPath, planInput, valuesAt } from './plan.js';
 
 await Actor.init();
 
@@ -69,7 +69,9 @@ if (plan.datasetId) {
         const { items } = await ds.listItems({ offset, limit: PAGE });
         const lines = items.flatMap((item) => valuesAt(item, plan.field));
         found += lines.length;
-        if (offset === 0 && lines.length === 0 && items.length > 0) {
+        // a field that is there but empty (a scraper that found no email on a page) is an empty result, not a failure: this actor is
+        // also started by integrations after a scraper run, and a scraper run with no emails must not turn the chain red
+        if (offset === 0 && lines.length === 0 && items.length > 0 && !items.some((item) => hasPath(item, plan.field))) {
             const fields = Object.keys(items[0] ?? {}).slice(0, 12).join(', ');
             await Actor.fail(`The field "${plan.field}" holds no text in the first ${items.length} items. Fields in the first item: ${fields || 'none'}. Nothing was charged.`);
         }

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { EVENT_NAME, SAMPLE_EMAILS, planInput, splitMany, valuesAt } from '../src/plan.js';
+import { EVENT_NAME, SAMPLE_EMAILS, hasPath, planInput, splitMany, valuesAt } from '../src/plan.js';
 
 test('the event name is a noun key; the Store title for it is set in the Console as "Checked email"', () => {
     assert.equal(EVENT_NAME, 'checked-email');
@@ -65,4 +65,15 @@ test('the emails input has a prefill but NO default: the platform adds a default
     assert.equal(schema.properties.datasetId.resourceType, 'dataset');
     assert.deepEqual(schema.properties.datasetId.resourcePermissions, ['READ']);
     assert.equal(planInput({ datasetId: 'AbC123xyz456QwErT', field: 'email' }).mode, 'dataset');
+});
+
+test('hasPath tells a missing field from an empty one: an empty email list is a field that is there (no addresses found), a missing field is a wrong field name', () => {
+    assert.equal(hasPath({ emails: [] }, 'emails'), true);
+    assert.equal(hasPath({ emails: null }, 'emails'), true);
+    assert.equal(hasPath({ emails: '' }, 'emails'), true);
+    assert.equal(hasPath({ contact: { email: null } }, 'contact.email'), true);
+    assert.equal(hasPath({ name: 'x' }, 'emails'), false);
+    assert.equal(hasPath({ contact: 'x' }, 'contact.email'), false);
+    assert.equal(hasPath(null, 'emails'), false);
+    assert.deepEqual(valuesAt({ emails: [] }, 'emails'), []);
 });
