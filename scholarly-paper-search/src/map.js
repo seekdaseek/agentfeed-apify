@@ -1,7 +1,7 @@
 // Input handling and mapping for AgentFeed's /api/papers (OpenAlex search) and /api/paper/:doi (one work).
 
 export const EVENT_NAME = 'paper';
-export const SOURCE = 'OpenAlex (openalex.org), via AgentFeed (x402.ochinimus.app)';
+export const SOURCE = 'OpenAlex (openalex.org), via AgentFeed';
 export const LICENSE = 'CC0';
 export const DEFAULT_QUERIES = ['large language models'];
 export const DEFAULT_DOIS = ['10.1038/nature14539'];

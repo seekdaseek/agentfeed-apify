@@ -1,7 +1,7 @@
 // Input handling and mapping for AgentFeed's /api/macro-calendar (the Fed, BLS and BEA release schedule).
 
 export const EVENT_NAME = 'release';
-export const SOURCE = 'AgentFeed (x402.ochinimus.app), dates read from the Federal Reserve, BLS and BEA pages named in each row';
+export const SOURCE = 'AgentFeed, dates read from the Federal Reserve, BLS and BEA pages named in each row';
 export const TYPES = ['FOMC', 'CPI', 'NFP', 'PCE'];
 export const DEFAULT_DAYS = 90;
 export const MIN_DAYS = 1;

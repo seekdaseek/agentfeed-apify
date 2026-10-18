@@ -25,7 +25,7 @@ test('mapCoin: a real /api/hl-whales?coin=BTC response becomes the documented it
     assert.equal(item.largest_positions[0].liquidation_px, d.top_positions[0].liquidation_px);
     assert.equal(item.accounts_scanned, d.accounts_scanned);
     assert.equal(item.source, SOURCE);
-    assert.equal(SOURCE, 'AgentFeed (x402.ochinimus.app), Hyperliquid on-chain positions');
+    assert.equal(SOURCE, 'AgentFeed, Hyperliquid on-chain positions');
 });
 
 test('mapCoin: bands are 5% of the mark price wide, as the README says', () => {

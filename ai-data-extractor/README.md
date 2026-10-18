@@ -83,7 +83,7 @@ A real result for the default input (the Solana article on Wikipedia), captured 
   ],
   "truncated": false,
   "pct_read": 100,
-  "source": "AgentFeed (x402.ochinimus.app), page or PDF fetched once from the URL you supplied",
+  "source": "AgentFeed, page or PDF fetched once from the URL you supplied",
   "fetched_at": "2026-10-15T09:58:50.000Z"
 }
 ```

@@ -1,7 +1,7 @@
 // Input handling and mapping for AgentFeed's /api/extract (one caller-supplied URL and a field schema to JSON).
 
 export const EVENT_NAME = 'extracted-page';
-export const SOURCE = 'AgentFeed (x402.ochinimus.app), page or PDF fetched once from the URL you supplied';
+export const SOURCE = 'AgentFeed, page or PDF fetched once from the URL you supplied';
 export const DEFAULT_URLS = ['https://en.wikipedia.org/wiki/Solana_(blockchain_platform)'];
 export const DEFAULT_SCHEMA = {
     name: 'string',

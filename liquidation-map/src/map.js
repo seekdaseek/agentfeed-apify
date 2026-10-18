@@ -3,7 +3,7 @@
 export const EVENT_NAME = 'liquidation-map';
 export const COIN_PATTERN = /^[A-Z0-9]{1,15}$/;
 export const DEFAULT_COINS = ['BTC', 'ETH', 'SOL'];
-export const SOURCE = 'AgentFeed (x402.ochinimus.app), Hyperliquid on-chain positions';
+export const SOURCE = 'AgentFeed, Hyperliquid on-chain positions';
 export const NO_BANDS_NOTE = 'No tracked position has a liquidation price within 50% of the mark, so this coin has no heatmap bands right now. This item was not charged.';
 
 const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null);

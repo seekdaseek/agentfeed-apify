@@ -112,7 +112,7 @@ A real result for BTC, captured live on 14 Oct 2026 and shortened for this page 
   ],
   "accounts_scanned": 250,
   "accounts_with_positions": 65,
-  "source": "AgentFeed (x402.ochinimus.app), Hyperliquid on-chain positions"
+  "source": "AgentFeed, Hyperliquid on-chain positions"
 }
 ```
 

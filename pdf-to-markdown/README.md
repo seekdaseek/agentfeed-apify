@@ -57,7 +57,7 @@ A real result for the example PDF, captured live on 14 Oct 2026. The `markdown` 
   "truncated": false,
   "markdown": "## Page 1\n\nBitcoin: A Peer-to-Peer Electronic Cash System\nSatoshi Nakamoto\nsatoshin@gmx.com\nwww.bitcoin.org\nAbstract. A purely peer-to-peer version of electronic cash would allow online\npayments to be sent directly from one party to another without going through a\nfinancial institution. Digital signatures provide part of the solution, but the main\nbenefits are lost if a trusted third party is still required to ...",
   "rights": "fetched once from the URL you supplied, on your request, and not stored; the content belongs to its publisher and you are responsible for your use of it",
-  "source": "AgentFeed (x402.ochinimus.app), PDF fetched once from the URL you supplied",
+  "source": "AgentFeed, PDF fetched once from the URL you supplied",
   "fetched_at": "2026-10-14T15:35:50.423Z"
 }
 ```

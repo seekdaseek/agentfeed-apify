@@ -1,7 +1,7 @@
 // Input handling and mapping for AgentFeed's /api/pdf-markdown (one caller-supplied PDF URL to markdown).
 
 export const EVENT_NAME = 'pdf';
-export const SOURCE = 'AgentFeed (x402.ochinimus.app), PDF fetched once from the URL you supplied';
+export const SOURCE = 'AgentFeed, PDF fetched once from the URL you supplied';
 export const DEFAULT_URLS = ['https://bitcoin.org/bitcoin.pdf'];
 export const MAX_URLS = 50;
 export const MAX_URL_CHARS = 2048;

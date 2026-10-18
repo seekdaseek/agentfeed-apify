@@ -66,7 +66,7 @@ A real result (the first row of the default run), captured live on 15 Oct 2026:
   "press_conference": true,
   "source_url": "https://www.federalreserve.gov/json/calendar.json",
   "verified_at": "2026-10-15T05:23:01.935Z",
-  "source": "AgentFeed (x402.ochinimus.app), dates read from the Federal Reserve, BLS and BEA pages named in each row",
+  "source": "AgentFeed, dates read from the Federal Reserve, BLS and BEA pages named in each row",
   "fetched_at": "2026-10-15T10:04:52.338Z"
 }
 ```

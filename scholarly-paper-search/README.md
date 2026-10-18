@@ -72,7 +72,7 @@ Two real results, captured live on 14 Oct 2026 and shortened for this page (auth
     "open_access_url": "https://www.repository.cam.ac.uk/handle/1810/349830",
     "abstract": null,
     "openalex_id": "https://openalex.org/W4384561707",
-    "source": "OpenAlex (openalex.org), via AgentFeed (x402.ochinimus.app)",
+    "source": "OpenAlex (openalex.org), via AgentFeed",
     "license": "CC0",
     "fetched_at": "2026-10-14T15:25:31.607Z"
   },
@@ -94,7 +94,7 @@ Two real results, captured live on 14 Oct 2026 and shortened for this page (auth
     "open_access_url": "https://hal.science/hal-04206682",
     "abstract": null,
     "openalex_id": "https://openalex.org/W2919115771",
-    "source": "OpenAlex (openalex.org), via AgentFeed (x402.ochinimus.app)",
+    "source": "OpenAlex (openalex.org), via AgentFeed",
     "license": "CC0",
     "fetched_at": "2026-10-14T15:25:31.721Z"
   }
