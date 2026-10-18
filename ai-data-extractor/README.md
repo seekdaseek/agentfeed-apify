@@ -96,7 +96,7 @@ You are charged only for a URL that returns at least one of your fields. A link 
 
 ## Data source and its limits
 
-- **Source: AgentFeed (x402.ochinimus.app).** It fetches the one URL you supply, once, on your request, and has a language model (currently Gemini 3.1 Flash-Lite) read it against your schema. The document is not stored.
+- **Source: AgentFeed, our own data service.** It fetches the one URL you supply, once, on your request, and has a language model (currently Gemini 3.1 Flash-Lite) read it against your schema. The document is not stored.
 - **One URL, one result.** It reads the page you give it and does not crawl links or follow pagination.
 - **Plain fetch, no browser.** Only http and https links on ports 80 and 443 are fetched, redirects are followed, as HTML or PDF. Content a site builds only with JavaScript after the page loads may be missing, and pages behind a login or a bot wall cannot be read.
 - **Up to 10 MB per document, and about the first 20,000 tokens are read.** `truncated` and `pct_read` say how much.
@@ -105,8 +105,6 @@ You are charged only for a URL that returns at least one of your fields. A link 
 - **A model reads the page, so check the values that matter.** `verbatim_fields` lists the values found word for word in the text; a value you need exact should be one of them, or checked against the page.
 - The content belongs to its publisher, and you are responsible for how you use it.
 
-## Built for agents too
+## Source code
 
-The same extraction is sold per call to AI agents over the x402 protocol (USDC, no account): [x402.ochinimus.app](https://x402.ochinimus.app), route `/api/extract`, OpenAPI at [x402.ochinimus.app/openapi.json](https://x402.ochinimus.app/openapi.json).
-
-Source code: [github.com/seekdaseek/agentfeed-apify](https://github.com/seekdaseek/agentfeed-apify) (MIT), folder `ai-data-extractor`.
+[github.com/seekdaseek/agentfeed-apify/tree/main/ai-data-extractor](https://github.com/seekdaseek/agentfeed-apify/tree/main/ai-data-extractor) (MIT).

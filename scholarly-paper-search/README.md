@@ -109,7 +109,7 @@ You are charged only for papers that come back. A search with no hits, a DOI Ope
 
 ## Data source and its limits
 
-- **Source: OpenAlex (openalex.org), through AgentFeed (x402.ochinimus.app).** OpenAlex's data is released under CC0, the public domain, so you may use and redistribute it freely.
+- **Source: OpenAlex (openalex.org), through AgentFeed, our own data service.** OpenAlex's data is released under CC0, the public domain, so you may use and redistribute it freely.
 - **This is not Google Scholar.** It does not scrape Google Scholar and is not affiliated with it. Coverage, ranking and citation counts are OpenAlex's and will differ from Google Scholar's.
 - **Searches return up to 25 papers each** and carry no abstract. Abstracts come with DOI lookups, and only where OpenAlex holds one.
 - **Cached for 24 hours:** repeating the same search within a day returns the same answer.
@@ -117,8 +117,6 @@ You are charged only for papers that come back. A search with no hits, a DOI Ope
 - Author lists are cut at 25 names (`authors_total` has the full count).
 - This is data, not advice, and you are responsible for how you use it.
 
-## Built for agents too
+## Source code
 
-The same data is sold per call to AI agents over the x402 protocol (USDC, no account): [x402.ochinimus.app](https://x402.ochinimus.app), routes `/api/papers` and `/api/paper/{doi}`, OpenAPI at [x402.ochinimus.app/openapi.json](https://x402.ochinimus.app/openapi.json).
-
-Source code: [github.com/seekdaseek/agentfeed-apify](https://github.com/seekdaseek/agentfeed-apify) (MIT), folder `scholarly-paper-search`.
+[github.com/seekdaseek/agentfeed-apify/tree/main/scholarly-paper-search](https://github.com/seekdaseek/agentfeed-apify/tree/main/scholarly-paper-search) (MIT).

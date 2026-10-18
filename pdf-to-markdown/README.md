@@ -70,7 +70,7 @@ You are charged only for PDFs that come back with text. A link that cannot be fe
 
 ## Data source and its limits
 
-- **Source: AgentFeed (x402.ochinimus.app).** It fetches the one URL you supply, once, on your request, extracts the text and does not store it.
+- **Source: AgentFeed, our own data service.** It fetches the one URL you supply, once, on your request, extracts the text and does not store it.
 - **Only PDFs with a text layer convert.** A scanned PDF that is only page images is not OCRed: it returns nothing and costs nothing.
 - **Limits per file:** 10 MB, and 10 seconds to fetch. Only http and https links on ports 80 and 443 are fetched, up to 3 redirects.
 - **robots.txt is honoured.** If the site forbids automated fetching, the link returns nothing.
@@ -79,8 +79,6 @@ You are charged only for PDFs that come back with text. A link that cannot be fe
 - Text comes out as the PDF's text layer provides it: multi-column pages, tables and footnotes may not read in order. Images are not described.
 - The PDF's content belongs to its publisher, and you are responsible for how you use it.
 
-## Built for agents too
+## Source code
 
-The same data is sold per call to AI agents over the x402 protocol (USDC, no account): [x402.ochinimus.app](https://x402.ochinimus.app), route `/api/pdf-markdown`, OpenAPI at [x402.ochinimus.app/openapi.json](https://x402.ochinimus.app/openapi.json).
-
-Source code: [github.com/seekdaseek/agentfeed-apify](https://github.com/seekdaseek/agentfeed-apify) (MIT), folder `pdf-to-markdown`.
+[github.com/seekdaseek/agentfeed-apify/tree/main/pdf-to-markdown](https://github.com/seekdaseek/agentfeed-apify/tree/main/pdf-to-markdown) (MIT).

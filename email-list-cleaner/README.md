@@ -151,8 +151,6 @@ Charged: one event per **unique** address that got a verdict (`valid`, `risky` o
 - `role`, `disposable` and typo flags are rules, not certainty: `risky` means "look at this one", not "will bounce".
 - Up to 200,000 lines per run; 256 MB of memory.
 
-## Built for agents too
+## Source code
 
-The same domain-level checks are sold per call to AI agents over the x402 protocol (USDC, no account) at [x402.ochinimus.app](https://x402.ochinimus.app), route `/api/email-verify`.
-
-Source code: [github.com/seekdaseek/agentfeed-apify](https://github.com/seekdaseek/agentfeed-apify) (MIT), folder `email-list-cleaner`. Data sources and licences: `SOURCES.md`.
+[github.com/seekdaseek/agentfeed-apify/tree/main/email-list-cleaner](https://github.com/seekdaseek/agentfeed-apify/tree/main/email-list-cleaner) (MIT). Data sources and licences: [SOURCES.md](https://github.com/seekdaseek/agentfeed-apify/blob/main/email-list-cleaner/SOURCES.md).

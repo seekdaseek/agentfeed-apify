@@ -95,7 +95,7 @@ You are charged only for filings that come back. A ticker that is not in the SEC
 
 ## Data source and its limits
 
-- **Source: public filings from the SEC's EDGAR system (sec.gov), through AgentFeed (x402.ochinimus.app).** EDGAR is public: its filings are free to access and reuse. Every item carries the source line `SEC EDGAR (public)`.
+- **Source: public filings from the SEC's EDGAR system (sec.gov), through AgentFeed, our own data service.** EDGAR is public: its filings are free to access and reuse. Every item carries the source line `SEC EDGAR (public)`.
 - **Not affiliated with or endorsed by the U.S. Securities and Exchange Commission (SEC).**
 - **Metadata and links, not filing text.** You get the filing's date, form, description and links; open the document link for the content.
 - **US-listed tickers only**, as listed in the SEC's company ticker list. Foreign private issuers file different forms (for example 6-K and 20-F), so use the `form` field accordingly.
@@ -104,8 +104,6 @@ You are charged only for filings that come back. A ticker that is not in the SEC
 - EDGAR limits how fast it can be queried, and the data source stays under that limit, so a very large input is processed one ticker at a time and takes a little longer.
 - This is data, not advice, and you are responsible for how you use it.
 
-## Built for agents too
+## Source code
 
-The same data is sold per call to AI agents over the x402 protocol (USDC, no account): [x402.ochinimus.app](https://x402.ochinimus.app), route `/api/sec-filings`, OpenAPI at [x402.ochinimus.app/openapi.json](https://x402.ochinimus.app/openapi.json).
-
-Source code: [github.com/seekdaseek/agentfeed-apify](https://github.com/seekdaseek/agentfeed-apify) (MIT), folder `us-company-filings`.
+[github.com/seekdaseek/agentfeed-apify/tree/main/us-company-filings](https://github.com/seekdaseek/agentfeed-apify/tree/main/us-company-filings) (MIT).

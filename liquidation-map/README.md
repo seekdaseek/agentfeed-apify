@@ -124,15 +124,13 @@ You are charged only for a coin that comes back with data. A coin Hyperliquid do
 
 ## Data source and its limits
 
-- Source: **AgentFeed (x402.ochinimus.app), Hyperliquid on-chain positions.** The positions are read from Hyperliquid's public account state; the accounts are public addresses as Hyperliquid publishes them.
+- Source: **AgentFeed, our own data service, Hyperliquid on-chain positions.** The positions are read from Hyperliquid's public account state; the accounts are public addresses as Hyperliquid publishes them.
 - **Hyperliquid only.** This is not the whole market: the map shows where *these accounts'* positions would be liquidated, not Binance, Bybit or OKX leverage.
 - **The largest accounts only.** The list is the top 250 accounts by account value on the Hyperliquid leaderboard, re-read hourly (`accounts_scanned` and `accounts_with_positions` are in every item). Many of them hold no position in a given coin.
 - **A snapshot, not a stream.** Positions are refreshed every 5 minutes at most. If the data source is stale it answers an error and the actor returns nothing rather than old numbers.
 - USD at risk is position **notional**, not margin.
 - This is data, not financial advice.
 
-## Built for agents too
+## Source code
 
-The same data is sold per call to AI agents over the x402 protocol (USDC, no account): [x402.ochinimus.app](https://x402.ochinimus.app), route `/api/hl-whales`, OpenAPI at [x402.ochinimus.app/openapi.json](https://x402.ochinimus.app/openapi.json).
-
-Source code: [github.com/seekdaseek/agentfeed-apify](https://github.com/seekdaseek/agentfeed-apify) (MIT).
+[github.com/seekdaseek/agentfeed-apify/tree/main/liquidation-map](https://github.com/seekdaseek/agentfeed-apify/tree/main/liquidation-map) (MIT).

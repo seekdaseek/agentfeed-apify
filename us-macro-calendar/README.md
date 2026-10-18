@@ -79,13 +79,11 @@ You are charged only for rows that come back. A window with no release of the ty
 
 ## Data source and its limits
 
-- **Source: AgentFeed (x402.ochinimus.app).** Dates and times are read every day from the Federal Reserve, BLS and BEA pages named in each row, never entered by hand; `utc` is converted from America/New_York for that date.
+- **Source: AgentFeed, our own data service.** Dates and times are read every day from the Federal Reserve, BLS and BEA pages named in each row, never entered by hand; `utc` is converted from America/New_York for that date.
 - **FOMC rows are the decision day** (the statement) of each meeting.
 - **The sources publish about a year ahead,** so the window never shows more than that, and an agency can reschedule a release: check `verified_at`.
 - The window is 1 to 365 days.
 
-## Built for agents too
+## Source code
 
-The same calendar is sold per call to AI agents over the x402 protocol (USDC, no account): [x402.ochinimus.app](https://x402.ochinimus.app), route `/api/macro-calendar`, OpenAPI at [x402.ochinimus.app/openapi.json](https://x402.ochinimus.app/openapi.json).
-
-Source code: [github.com/seekdaseek/agentfeed-apify](https://github.com/seekdaseek/agentfeed-apify) (MIT), folder `us-macro-calendar`.
+[github.com/seekdaseek/agentfeed-apify/tree/main/us-macro-calendar](https://github.com/seekdaseek/agentfeed-apify/tree/main/us-macro-calendar) (MIT).
