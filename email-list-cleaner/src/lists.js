@@ -8,6 +8,9 @@ export const ROLES = new Set([
     'media', 'news', 'newsletter', 'no-reply', 'noreply', 'office', 'ops', 'orders', 'partners', 'partnerships', 'payments', 'postmaster', 'pr', 'press',
     'privacy', 'recruiting', 'recruitment', 'reception', 'remove', 'reservations', 'returns', 'root', 'sales', 'security', 'service', 'services', 'shop',
     'spam', 'subscribe', 'support', 'team', 'tech', 'unsubscribe', 'webmaster', 'welcome', 'www',
+    // plural and singular forms real role inboxes use next to the words above
+    'webmasters', 'admins', 'administrators', 'postmasters', 'hostmasters', 'contacts', 'teams', 'newsletters', 'invoice', 'invoices',
+    'account', 'order', 'booking', 'payment', 'partner', 'job', 'career', 'sale',
 ]);
 
 // A role word followed by a separator and more text (info.chicago@, sales_team@, support+eu@) is a role account as well.

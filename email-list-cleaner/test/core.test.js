@@ -59,7 +59,17 @@ test('typos: one edit from a popular domain, named typos, and a mistyped ending 
 
 test('role accounts: exact words and a role word with a separator; a person is not a role', () => {
     for (const l of ['info', 'Sales', 'support', 'noreply', 'no-reply', 'info.chicago', 'sales_team', 'support+eu', 'billing-dept']) assert.equal(isRole(l), true, l);
+    for (const l of ['webmasters', 'admins', 'administrators', 'postmasters', 'contacts', 'teams', 'invoices', 'account', 'order']) assert.equal(isRole(l), true, l);
     for (const l of ['jane', 'information', 'salesman', 'jane.info', 'assistant', 'teamwork']) assert.equal(isRole(l), false, l);
+});
+
+test('role verdict: webmasters@ and admins@ come back risky with the role reason, like webmaster@', () => {
+    for (const e of ['webmaster@acme.com', 'webmasters@acme.com', 'admins@acme.com']) {
+        const r = run(e);
+        assert.equal(r.status, 'risky', e);
+        assert.equal(r.role, true, e);
+    }
+    assert.equal(run('jane@acme.com').status, 'valid');
 });
 
 test('disposable: the domain or a parent is on the list; free providers are recognised', () => {
