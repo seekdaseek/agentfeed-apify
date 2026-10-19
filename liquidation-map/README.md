@@ -22,6 +22,14 @@ Coins whose tracked positions sit far from liquidation can return few or no band
 - Feed a bot, spreadsheet or dashboard: run the actor on an Apify schedule or call it through the API. The positions behind it are refreshed every 5 minutes at most, so polling faster returns the same snapshot (`as_of` tells you).
 - Export the results as JSON, CSV or Excel.
 
+## Coming from a CoinGlass heatmap Actor?
+
+This Actor is not a drop-in replacement. It does not accept the `symbol`, `model` or `interval` inputs, and its output has different fields. If you want to try it, send `coins` where you sent `symbol`, for example `{"coins": ["ETH"]}`.
+
+You get, for each coin, the USD at risk in each 5% price band, long and short, and the 20 largest positions with address, liquidation price and leverage, all from real Hyperliquid positions.
+
+You do not get cross-exchange estimates, a time axis, candles, or stock and commodity tickers.
+
 ## Input
 
 | Field | Type | Default | Description |
