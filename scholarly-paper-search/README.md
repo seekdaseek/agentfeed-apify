@@ -1,4 +1,4 @@
-# Scholarly Paper Search: OpenAlex, Google Scholar alternative
+# Research Paper Search: OpenAlex, Google Scholar alternative
 
 **Search scholarly papers by topic and look up papers by DOI. Every result is one clean JSON item: title, year, DOI, authors, venue, citation count and a link to a free copy when one exists. The data comes from OpenAlex's open CC0 dataset, not from scraping Google Scholar.**
 

@@ -1,4 +1,4 @@
-# Email Cleaner: fix, dedupe and check scraped emails (no SMTP)
+# Email Cleaner: dedupe, fix and flag disposable emails (no SMTP)
 
 **Cleans the email list a scraper left behind. It fixes the leftovers around an address, drops the junk that is not an address at all, removes duplicates, and checks each domain with DNS: does it take mail, is it disposable, is the address a role account, is the domain a typo. It does not check that a mailbox exists: there is no SMTP probe, and the actor never says an address is "deliverable".**
 
