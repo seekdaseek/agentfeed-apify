@@ -1,7 +1,7 @@
 {
     "actorSpecification": 1,
     "name": "scholarly-paper-search",
-    "title": "Scholarly Paper Search: OpenAlex, Google Scholar alternative",
+    "title": "Research Paper Search: OpenAlex, Google Scholar alternative",
     "description": "Search scholarly papers and look up DOIs from OpenAlex's CC0 data: title, year, DOI, authors, venue, citation count and open-access link. A Google Scholar alternative that does not scrape Google.",
     "version": "1.0",
     "buildTag": "latest",
